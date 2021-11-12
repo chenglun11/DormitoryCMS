@@ -1,0 +1,21 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: lichengan0717
+server:
+  port: 8888
+  servlet:
+    context-path: /dormitory
+
+mybatis:
+    mapper-locations: com/lchnan/mapper/*.xml
+
+logging:
+    level:
+        com:
+          lchnan:
+            dormitory:
+              mapper: debug

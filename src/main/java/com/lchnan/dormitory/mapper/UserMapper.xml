@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.UserMapper">
+
+    <resultMap id="User" type="com.lchnan.dormitory.entity.User">
+        <id column="id" property="id"></id>
+        <result column="user_name" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+        <result column="type" property="type"></result>
+        <result column="remark" property="remark"></result>
+    </resultMap>
+
+    <insert id="create" keyProperty="id" parameterType="com.lchnan.dormitory.entity.User" useGeneratedKeys="true" >
+        insert into tb_user (user_name, password, name, phone, type, remark)
+        values (#{userName},#{password},#{name},#{phone},#{type},#{remark})
+    </insert>
+
+    <delete id="delete">
+        delete from tb_user where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.lchnan.dormitory.entity.User">
+        update tb_user set user_name = #{userName},password = #{password},name = #{name},phone = #{phone},type = #{type},remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <select id="query" resultMap="User">
+        select * from  tb_user
+        <include refid="WhereUser"></include>
+    </select>
+
+    <!--    sql片段-->
+    <sql id="WhereUser">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+        </where>
+    </sql>
+
+    <select id="detail" resultMap="User">
+     select * from tb_user where id = ${id}
+    </select>
+
+</mapper>
