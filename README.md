@@ -5,4 +5,4 @@
 #### Please use IDEA and WebStorm to open separately, the front and back ends of this project are separated
 
 
-#### [![github](https://img.shields.io/badge/github-chenlun11-brightgreen.svg)](https://img.shields.io/appveyor/build/chenglun11/dormitory)
+#### [![github](https://img.shields.io/badge/github-chenlun11-brightgreen.svg)](https://lchnan.cn)
