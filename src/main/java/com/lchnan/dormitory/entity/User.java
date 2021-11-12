@@ -1,10 +1,12 @@
 package com.lchnan.dormitory.entity;
 
+import com.lchnan.dormitory.utils.Entity;
+
 /**
  * @author admin@lchnan.cn
  * @date 2021/11/12 17:10
  */
-public class User {
+public class User extends Entity {
     private Integer id;
     private String userName;
     private String password;
@@ -68,4 +70,6 @@ public class User {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+
 }

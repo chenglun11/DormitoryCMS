@@ -11,11 +11,16 @@ server:
     context-path: /dormitory
 
 mybatis:
-    mapper-locations: com/lchnan/mapper/*.xml
+  mapper-locations: com/lchnan/mapper/*.xml
 
 logging:
-    level:
-        com:
-          lchnan:
-            dormitory:
-              mapper: debug
+  level:
+    com:
+      lchnan:
+        dormitory:
+          mapper: debug
+#打开debug
+
+pagehelper:
+  auto-dialect: true
+#修改pagehelper的语法

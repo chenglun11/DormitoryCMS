@@ -1,5 +1,7 @@
 package com.lchnan.dormitory.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lchnan.dormitory.entity.User;
 import com.lchnan.dormitory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,13 @@ public class UserController {
         userService.update(user);
     }
 
+    @GetMapping("query")
+    public PageInfo<User> query(User user){
+        return userService.query(user);
+    }
+
     @GetMapping("detail")
     public User detail(Integer id){
         return userService.detail(id);
-    }
-
-    @GetMapping("query")
-    public List<User> query(User user){
-        return userService.query(user);
     }
 }

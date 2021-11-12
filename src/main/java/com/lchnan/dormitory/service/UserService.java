@@ -1,5 +1,7 @@
 package com.lchnan.dormitory.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lchnan.dormitory.entity.User;
 import com.lchnan.dormitory.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,12 @@ public class UserService {
         return userMapper.update(user);
     }
 
-    public List<User> query(User user){
-        return userMapper.query(user);
+    public PageInfo<User> query(User user){
+        if(user !=null && user.getPage() != null){
+            PageHelper.startPage(user.getPage(),user.getLimit());
+        }
+        PageInfo<User> pageInfo = new PageInfo(userMapper.query(user));
+        return pageInfo;
     }
 
     public User detail(Integer id){
