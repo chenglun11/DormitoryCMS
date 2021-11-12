@@ -5,4 +5,4 @@
 #### Please use IDEA and WebStorm to open separately, the front and back ends of this project are separated
 
 
-#### https://img.shields.io/appveyor/build/chenglun11/dormitory
+#### [!https://img.shields.io/appveyor/build/chenglun11/dormitory
