@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.SelectionMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Selection" id="Selection">
+		<id column="id" property="id"/>
+		<result column="name"  property="name"/>
+		<result column="start_time"  property="startTime"/>
+		<result column="end_time"  property="endTime"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Selection">
+		insert into tb_selection(
+			name,
+			start_time,
+			end_time,
+			remark
+		)values(
+			#{name},
+			#{startTime},
+			#{endTime},
+			#{remark}
+		)
+	</insert>
+
+	<select id="query" resultMap="Selection">
+		select * from tb_selection
+		<include refid="SelectionFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_selection
+		<include refid="SelectionFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Selection">
+		select * from tb_selection where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_selection where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_selection set
+			name=#{name},
+			start_time=#{startTime},
+			end_time=#{endTime},
+			remark=#{remark}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_selection set
+			<if test="name != null and name != ''"> name = #{name}</if>,
+			<if test="startTime != null and startTime != ''"> start_time = #{startTime}</if>,
+			<if test="endTime != null and endTime != ''"> end_time = #{endTime}</if>,
+			<if test="remark != null and remark != ''"> remark = #{remark}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="SelectionFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="name != null and name != ''">and name = #{name}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
+
+</mapper>

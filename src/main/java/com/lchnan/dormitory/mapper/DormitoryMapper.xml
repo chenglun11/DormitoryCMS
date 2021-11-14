@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.DormitoryMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Dormitory" id="Dormitory">
+		<id column="id" property="id"/>
+		<result column="no"  property="no"/>
+		<result column="sex"  property="sex"/>
+		<result column="type"  property="type"/>
+		<result column="capacity"  property="capacity"/>
+		<result column="storey_id"  property="storeyId"/>
+		<result column="building_id"  property="buildingId"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Dormitory">
+		insert into tb_dormitory(
+			no,
+			sex,
+			type,
+			capacity,
+			storey_id,
+			building_id
+		)values(
+			#{no},
+			#{sex},
+			#{type},
+			#{capacity},
+			#{storeyId},
+			#{buildingId}
+		)
+	</insert>
+
+	<select id="query" resultMap="Dormitory">
+		select * from tb_dormitory
+		<include refid="DormitoryFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_dormitory
+		<include refid="DormitoryFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Dormitory">
+		select * from tb_dormitory where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_dormitory where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_dormitory set
+			no=#{no},
+			sex=#{sex},
+			type=#{type},
+			capacity=#{capacity},
+			storey_id=#{storeyId},
+			building_id=#{buildingId}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_dormitory set
+			<if test="no != null and no != ''"> no = #{no}</if>,
+			<if test="sex != null">sex = #{sex}</if>,
+			<if test="type != null">type = #{type}</if>,
+			<if test="capacity != null">capacity = #{capacity}</if>,
+			<if test="storeyId != null">storey_id = #{storeyId}</if>,
+			<if test="buildingId != null">building_id = #{buildingId}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="DormitoryFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="no != null and no != ''">and no = #{no}</if>
+			<if test="sex != null">and sex = #{sex}</if>
+			<if test="type != null">and type = #{type}</if>
+			<if test="capacity != null">and capacity = #{capacity}</if>
+			<if test="storeyId != null">and storey_id = #{storeyId}</if>
+			<if test="buildingId != null">and building_id = #{buildingId}</if>
+		</where>
+	</sql>
+
+</mapper>

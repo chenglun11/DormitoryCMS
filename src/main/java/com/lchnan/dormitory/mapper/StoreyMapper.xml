@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.StoreyMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Storey" id="Storey">
+		<id column="id" property="id"/>
+		<result column="name"  property="name"/>
+		<result column="building_id"  property="buildingId"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Storey">
+		insert into tb_storey(
+			name,
+			building_id,
+			remark
+		)values(
+			#{name},
+			#{buildingId},
+			#{remark}
+		)
+	</insert>
+
+	<select id="query" resultMap="Storey">
+		select * from tb_storey
+		<include refid="StoreyFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_storey
+		<include refid="StoreyFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Storey">
+		select * from tb_storey where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_storey where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_storey set
+			name=#{name},
+			building_id=#{buildingId},
+			remark=#{remark}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_storey set
+			<if test="name != null and name != ''"> name = #{name}</if>,
+			<if test="buildingId != null">building_id = #{buildingId}</if>,
+			<if test="remark != null and remark != ''"> remark = #{remark}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="StoreyFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="name != null and name != ''">and name = #{name}</if>
+			<if test="buildingId != null">and building_id = #{buildingId}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
+
+</mapper>

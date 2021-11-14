@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.UserMenuMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.UserMenu" id="UserMenu">
+		<id column="id" property="id"/>
+		<result column="user_id"  property="userId"/>
+		<result column="menu_id"  property="menuId"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.UserMenu">
+		insert into tb_user_menu(
+			user_id,
+			menu_id
+		)values(
+			#{userId},
+			#{menuId}
+		)
+	</insert>
+
+	<select id="query" resultMap="UserMenu">
+		select * from tb_user_menu
+		<include refid="UserMenuFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_user_menu
+		<include refid="UserMenuFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="UserMenu">
+		select * from tb_user_menu where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_user_menu where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_user_menu set
+			user_id=#{userId},
+			menu_id=#{menuId}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_user_menu set
+			<if test="userId != null">user_id = #{userId}</if>,
+			<if test="menuId != null">menu_id = #{menuId}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="UserMenuFindCriteria">
+		<where>
+			<if test="userId != null">and user_id = #{userId}</if>
+			<if test="menuId != null">and menu_id = #{menuId}</if>
+		</where>
+	</sql>
+
+</mapper>

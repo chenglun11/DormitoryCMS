@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.BuildingMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Building" id="Building">
+		<id column="id" property="id"/>
+		<result column="name"  property="name"/>
+		<result column="type"  property="type"/>
+		<result column="storey_num"  property="storeyNum"/>
+		<result column="sex"  property="sex"/>
+		<result column="remark"  property="remark"/>
+		<result column="user_id"  property="userId"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Building">
+		insert into tb_building(
+			name,
+			type,
+			storey_num,
+			sex,
+			remark,
+			user_id
+		)values(
+			#{name},
+			#{type},
+			#{storeyNum},
+			#{sex},
+			#{remark},
+			#{userId}
+		)
+	</insert>
+
+	<select id="query" resultMap="Building">
+		select * from tb_building
+		<include refid="BuildingFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_building
+		<include refid="BuildingFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Building">
+		select * from tb_building where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_building where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_building set
+			name=#{name},
+			type=#{type},
+			storey_num=#{storeyNum},
+			sex=#{sex},
+			remark=#{remark},
+			user_id=#{userId}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_building set
+			<if test="name != null and name != ''"> name = #{name}</if>,
+			<if test="type != null">type = #{type}</if>,
+			<if test="storeyNum != null">storey_num = #{storeyNum}</if>,
+			<if test="sex != null">sex = #{sex}</if>,
+			<if test="remark != null and remark != ''"> remark = #{remark}</if>,
+			<if test="userId != null">user_id = #{userId}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="BuildingFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="name != null and name != ''">and name = #{name}</if>
+			<if test="type != null">and type = #{type}</if>
+			<if test="storeyNum != null">and storey_num = #{storeyNum}</if>
+			<if test="sex != null">and sex = #{sex}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+			<if test="userId != null">and user_id = #{userId}</if>
+		</where>
+	</sql>
+
+</mapper>

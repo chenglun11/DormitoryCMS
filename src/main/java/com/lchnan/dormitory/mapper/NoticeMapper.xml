@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.NoticeMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Notice" id="Notice">
+		<id column="id" property="id"/>
+		<result column="title"  property="title"/>
+		<result column="content"  property="content"/>
+		<result column="create_time"  property="createTime"/>
+		<result column="user_id"  property="userId"/>
+		<result column="filepath"  property="filepath"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Notice">
+		insert into tb_notice(
+			title,
+			content,
+			create_time,
+			user_id,
+			filepath
+		)values(
+			#{title},
+			#{content},
+			#{createTime},
+			#{userId},
+			#{filepath}
+		)
+	</insert>
+
+	<select id="query" resultMap="Notice">
+		select * from tb_notice
+		<include refid="NoticeFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_notice
+		<include refid="NoticeFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Notice">
+		select * from tb_notice where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_notice where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_notice set
+			title=#{title},
+			content=#{content},
+			create_time=#{createTime},
+			user_id=#{userId},
+			filepath=#{filepath}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_notice set
+			<if test="title != null and title != ''"> title = #{title}</if>,
+			<if test="content != null and content != ''"> content = #{content}</if>,
+			<if test="createTime != null and createTime != ''"> create_time = #{createTime}</if>,
+			<if test="userId != null">user_id = #{userId}</if>,
+			<if test="filepath != null and filepath != ''"> filepath = #{filepath}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="NoticeFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="title != null and title != ''">and title = #{title}</if>
+			<if test="content != null and content != ''">and content = #{content}</if>
+			<if test="userId != null">and user_id = #{userId}</if>
+			<if test="filepath != null and filepath != ''">and filepath = #{filepath}</if>
+		</where>
+	</sql>
+
+</mapper>

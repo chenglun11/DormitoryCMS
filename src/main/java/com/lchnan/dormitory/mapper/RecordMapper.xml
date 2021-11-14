@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.RecordMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Record" id="Record">
+		<id column="id" property="id"/>
+		<result column="student_id"  property="studentId"/>
+		<result column="dormitory_id"  property="dormitoryId"/>
+		<result column="bed_id"  property="bedId"/>
+		<result column="status"  property="status"/>
+		<result column="create_date"  property="createDate"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Record">
+		insert into tb_record(
+			student_id,
+			dormitory_id,
+			bed_id,
+			status,
+			create_date
+		)values(
+			#{studentId},
+			#{dormitoryId},
+			#{bedId},
+			#{status},
+			#{createDate}
+		)
+	</insert>
+
+	<select id="query" resultMap="Record">
+		select * from tb_record
+		<include refid="RecordFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_record
+		<include refid="RecordFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Record">
+		select * from tb_record where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_record where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_record set
+			student_id=#{studentId},
+			dormitory_id=#{dormitoryId},
+			bed_id=#{bedId},
+			status=#{status},
+			create_date=#{createDate}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_record set
+			<if test="studentId != null">student_id = #{studentId}</if>,
+			<if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
+			<if test="bedId != null">bed_id = #{bedId}</if>,
+			<if test="status != null">status = #{status}</if>,
+			<if test="createDate != null and createDate != ''"> create_date = #{createDate}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="RecordFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="studentId != null">and student_id = #{studentId}</if>
+			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+			<if test="bedId != null">and bed_id = #{bedId}</if>
+			<if test="status != null">and status = #{status}</if>
+		</where>
+	</sql>
+
+</mapper>

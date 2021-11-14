@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lchnan.dormitory.mapper.MenuMapper">
+
+	<resultMap type="com.lchnan.dormitory.entity.Menu" id="Menu">
+		<id column="id" property="id"/>
+		<result column="title"  property="title"/>
+		<result column="icon"  property="icon"/>
+		<result column="href"  property="href"/>
+		<result column="target"  property="target"/>
+		<result column="parent_id"  property="parentId"/>
+		<result column="type"  property="type"/>
+	</resultMap>
+
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Menu">
+		insert into tb_menu(
+			title,
+			icon,
+			href,
+			target,
+			parent_id,
+			type
+		)values(
+			#{title},
+			#{icon},
+			#{href},
+			#{target},
+			#{parentId},
+			#{type}
+		)
+	</insert>
+
+	<select id="query" resultMap="Menu">
+		select * from tb_menu
+		<include refid="MenuFindCriteria"/>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from tb_menu
+		<include refid="MenuFindCriteria"/>
+	</select>
+
+	<select id="detail" resultMap="Menu">
+		select * from tb_menu where id = #{id}
+	</select>
+
+	<delete id="delete">
+		delete from tb_menu where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_menu set
+			title=#{title},
+			icon=#{icon},
+			href=#{href},
+			target=#{target},
+			parent_id=#{parentId},
+			type=#{type}
+		where id = #{id}
+	</update>
+
+	<update id="updateSelective">
+		update tb_menu set
+			<if test="title != null and title != ''"> title = #{title}</if>,
+			<if test="icon != null and icon != ''"> icon = #{icon}</if>,
+			<if test="href != null and href != ''"> href = #{href}</if>,
+			<if test="target != null and target != ''"> target = #{target}</if>,
+			<if test="parentId != null">parent_id = #{parentId}</if>,
+			<if test="type != null">type = #{type}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="MenuFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="title != null and title != ''">and title = #{title}</if>
+			<if test="icon != null and icon != ''">and icon = #{icon}</if>
+			<if test="href != null and href != ''">and href = #{href}</if>
+			<if test="target != null and target != ''">and target = #{target}</if>
+			<if test="parentId != null">and parent_id = #{parentId}</if>
+			<if test="type != null">and type = #{type}</if>
+		</where>
+	</sql>
+
+</mapper>

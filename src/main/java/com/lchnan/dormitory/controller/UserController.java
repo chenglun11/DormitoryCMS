@@ -1,20 +1,15 @@
 package com.lchnan.dormitory.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lchnan.dormitory.entity.User;
-import com.lchnan.dormitory.service.UserService;
+import com.yanzhen.entity.User;
+import com.yanzhen.service.UserService;
+import com.yanzhen.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * @author admin@lchnan.cn
- * @date 2021/11/12 17:20
- */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -22,37 +17,45 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("create")
-    public void create(){
-        User user = new User();
-        user.setUserName("admin");
-        user.setName("admin");
-        user.setPassword("123456");
-        userService.create(user);
+    @PostMapping("create")
+    public Result create(@RequestBody User user){
+        int flag = userService.create(user);
+        if(flag>0){
+            return Result.ok();
+        }else{
+            return Result.fail();
+        }
     }
 
     @GetMapping("delete")
-    public void delete(Integer id){
-        userService.delete(id);
+    public Result delete(String ids){
+        int flag = userService.delete(ids);
+        if(flag>0){
+            return Result.ok();
+        }else{
+            return Result.fail();
+        }
     }
 
-    @GetMapping("update")
-    public void update(){
-        User user = new User();
-        user.setUserName("adminxxx");
-        user.setName("adminxxx");
-        user.setId(9);
-        user.setPassword("123456xxx");
-        userService.update(user);
-    }
-
-    @GetMapping("query")
-    public PageInfo<User> query(User user){
-        return userService.query(user);
+    @PostMapping("update")
+    public Result update(@RequestBody User user){
+        int flag = userService.update(user);
+        if(flag>0){
+            return Result.ok();
+        }else{
+            return Result.fail();
+        }
     }
 
     @GetMapping("detail")
     public User detail(Integer id){
         return userService.detail(id);
     }
+
+    @PostMapping("query")
+    public Map<String,Object> query(@RequestBody  User user){
+        PageInfo<User> pageInfo = userService.query(user);
+        return Result.ok(pageInfo);
+    }
+
 }
