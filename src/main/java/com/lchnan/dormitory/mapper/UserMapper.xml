@@ -2,45 +2,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.UserMapper">
 
-    <resultMap id="User" type="com.lchnan.dormitory.entity.User">
-        <id column="id" property="id"></id>
-        <result column="user_name" property="userName"></result>
-        <result column="password" property="password"></result>
-        <result column="name" property="name"></result>
-        <result column="phone" property="phone"></result>
-        <result column="type" property="type"></result>
-        <result column="remark" property="remark"></result>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.User" id="User">
+		<id column="id" property="id"/>
+		<result column="user_name"  property="userName"/>
+		<result column="password"  property="password"/>
+		<result column="name"  property="name"/>
+		<result column="phone"  property="phone"/>
+		<result column="type"  property="type"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" parameterType="com.lchnan.dormitory.entity.User" useGeneratedKeys="true" >
-        insert into tb_user (user_name, password, name, phone, type, remark)
-        values (#{userName},#{password},#{name},#{phone},#{type},#{remark})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.User">
+		insert into tb_user(
+			user_name,
+			password,
+			name,
+			phone,
+			type,
+			remark
+		)values(
+			#{userName},
+			#{password},
+			#{name},
+			#{phone},
+			#{type},
+			#{remark}
+		)
+	</insert>
 
-    <delete id="delete">
-        delete from tb_user where id = #{id}
-    </delete>
+	<select id="query" resultMap="User">
+		select * from tb_user
+		<include refid="UserFindCriteria"/>
+	</select>
 
-    <update id="update" parameterType="com.lchnan.dormitory.entity.User">
-        update tb_user set user_name = #{userName},password = #{password},name = #{name},phone = #{phone},type = #{type},remark = #{remark}
-        where id = #{id}
-    </update>
+	<select id="count" resultType="int">
+		select count(1) from tb_user
+		<include refid="UserFindCriteria"/>
+	</select>
 
-    <select id="query" resultMap="User">
-        select * from  tb_user
-        <include refid="WhereUser"></include>
-    </select>
+	<select id="detail" resultMap="User">
+		select * from tb_user where id = #{id}
+	</select>
 
-    <!--    sql片段-->
-    <sql id="WhereUser">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
-        </where>
-    </sql>
+	<delete id="delete">
+		delete from tb_user where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_user set
+			user_name=#{userName},
+			password=#{password},
+			name=#{name},
+			phone=#{phone},
+			type=#{type},
+			remark=#{remark}
+		where id = #{id}
+	</update>
 
-    <select id="detail" resultMap="User">
-     select * from tb_user where id = ${id}
-    </select>
+	<update id="updateSelective">
+		update tb_user set
+			<if test="userName != null and userName != ''"> user_name = #{userName}</if>,
+			<if test="password != null and password != ''"> password = #{password}</if>,
+			<if test="name != null and name != ''"> name = #{name}</if>,
+			<if test="phone != null and phone != ''"> phone = #{phone}</if>,
+			<if test="type != null">type = #{type}</if>,
+			<if test="remark != null and remark != ''"> remark = #{remark}</if>
+		where id = #{id}
+	</update>
+
+	<sql id="UserFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="userName != null and userName != ''">and user_name = #{userName}</if>
+			<if test="password != null and password != ''">and password = #{password}</if>
+			<if test="name != null and name != ''">and name = #{name}</if>
+			<if test="phone != null and phone != ''">and phone = #{phone}</if>
+			<if test="type != null">and type = #{type}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
 
 </mapper>

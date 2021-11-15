@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.StoreyMapper;
-import com.yanzhen.entity.Storey;
+import com.lchnan.dormitory.mapper.StoreyMapper;
+import com.lchnan.dormitory.entity.Storey;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

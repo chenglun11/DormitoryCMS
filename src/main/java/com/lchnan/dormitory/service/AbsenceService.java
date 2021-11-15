@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.AbsenceMapper;
-import com.yanzhen.entity.Absence;
+import com.lchnan.dormitory.mapper.AbsenceMapper;
+import com.lchnan.dormitory.entity.Absence;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

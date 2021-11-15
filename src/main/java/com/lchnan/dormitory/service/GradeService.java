@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.GradeMapper;
-import com.yanzhen.entity.Grade;
+import com.lchnan.dormitory.mapper.GradeMapper;
+import com.lchnan.dormitory.entity.Grade;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

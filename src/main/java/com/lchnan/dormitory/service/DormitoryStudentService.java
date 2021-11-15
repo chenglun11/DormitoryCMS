@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.DormitoryStudentMapper;
-import com.yanzhen.entity.DormitoryStudent;
+import com.lchnan.dormitory.mapper.DormitoryStudentMapper;
+import com.lchnan.dormitory.entity.DormitoryStudent;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

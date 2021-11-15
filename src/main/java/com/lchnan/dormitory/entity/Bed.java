@@ -1,8 +1,10 @@
-package com.lchnan.dormitorymodules.entity.entity;
+package com.lchnan.dormitory.entity;
 
 import javax.validation.constraints.NotNull;
+
+import com.lchnan.dormitory.utils.Entity;
 import org.hibernate.validator.constraints.Length;
-import com.yanzhen.utils.Entity;
+import com.lchnan.dormitory.utils.Entity;
 import java.util.Date;
 
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * @author admin@lchnan.cn
  * @time 2021-11-13 12:14:11
  */
-public class Bed extends Entity{
+public class Bed extends Entity {
 
 	/**
 	 * 

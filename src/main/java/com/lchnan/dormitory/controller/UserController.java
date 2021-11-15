@@ -1,15 +1,17 @@
 package com.lchnan.dormitory.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.yanzhen.entity.User;
-import com.yanzhen.service.UserService;
-import com.yanzhen.utils.Result;
+import com.lchnan.dormitory.entity.User;
+import com.lchnan.dormitory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
-
+/**
+ * @author admin@lchnan.cn
+ * @date 2021/11/9 11:23
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -17,45 +19,38 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("create")
-    public Result create(@RequestBody User user){
-        int flag = userService.create(user);
-        if(flag>0){
-            return Result.ok();
-        }else{
-            return Result.fail();
-        }
+    @GetMapping("create")
+    public void create(){
+        User user = new User();
+        user.setName("admin");
+        user.setUserName("admin");
+        user.setPassword("123456");
+        userService.create(user);       //对用户进行创建
     }
 
     @GetMapping("delete")
-    public Result delete(String ids){
-        int flag = userService.delete(ids);
-        if(flag>0){
-            return Result.ok();
-        }else{
-            return Result.fail();
-        }
+    public void delete(Integer id){
+        userService.delete(id);         //对用户进行删除
     }
 
-    @PostMapping("update")
-    public Result update(@RequestBody User user){
-        int flag = userService.update(user);
-        if(flag>0){
-            return Result.ok();
-        }else{
-            return Result.fail();
-        }
+    @GetMapping("update")
+    public void update(){
+        User user = new User();
+        user.setName("adminxx");
+        user.setUserName("adminxx");
+        user.setPassword("123456xx");
+        user.setId(1);
+        userService.create(user);   //对用户进行修改
     }
 
     @GetMapping("detail")
     public User detail(Integer id){
-        return userService.detail(id);
+        return userService.detail(id);         //对用户进行删除
     }
 
-    @PostMapping("query")
-    public Map<String,Object> query(@RequestBody  User user){
-        PageInfo<User> pageInfo = userService.query(user);
-        return Result.ok(pageInfo);
-    }
+    @GetMapping("query")
+    public PageInfo<User> query(User user){
 
+        return userService.query(user);
+    }
 }

@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.MenuMapper;
-import com.yanzhen.entity.Menu;
+import com.lchnan.dormitory.mapper.MenuMapper;
+import com.lchnan.dormitory.entity.Menu;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

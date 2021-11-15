@@ -1,7 +1,7 @@
 package com.lchnan.dormitory.service;
 
-import com.yanzhen.mapper.NoticeReceiveMapper;
-import com.yanzhen.entity.NoticeReceive;
+import com.lchnan.dormitory.mapper.NoticeReceiveMapper;
+import com.lchnan.dormitory.entity.NoticeReceive;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
