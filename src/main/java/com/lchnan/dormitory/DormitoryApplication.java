@@ -12,7 +12,6 @@ import java.util.Properties;
 
 @SpringBootApplication
 @MapperScan({"com.lchnan.dormitory.mapper"})
-
 public class DormitoryApplication {
 
     public static void main(String[] args) {

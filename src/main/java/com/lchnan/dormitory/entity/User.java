@@ -1,6 +1,9 @@
 package com.lchnan.dormitory.entity;
 
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 import com.lchnan.dormitory.utils.Entity;
 import java.util.Date;
@@ -59,9 +62,12 @@ public class User extends Entity{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	@JsonIgnore
 	public String getPassword() {
+
 		return password;
 	}
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

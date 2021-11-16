@@ -11,7 +11,7 @@ server:
     context-path: /dormitory
 
 mybatis:
-  mapper-locations: com/lchnan/mapper/*.xml
+  mapper-locations: com/lchnan/dormitory/mapper/*.xml
 
 logging:
   level:

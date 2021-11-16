@@ -81,4 +81,8 @@
 		</where>
 	</sql>
 
+	<select id="login" resultMap="User">
+		select * from tb_user where user_name = #{userName} and password=#{password}
+	</select>
+
 </mapper>

@@ -5,6 +5,7 @@ import com.lchnan.dormitory.mapper.UserMapper;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -56,5 +57,9 @@ public class UserService {
 
     public int count(User user) {
         return userMapper.count(user);
+    }
+
+    public User login(String userName,String password){
+        return userMapper.login(userName,password);
     }
 }
