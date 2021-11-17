@@ -1,10 +1,9 @@
 package com.lchnan.dormitory.mapper;
 
-import java.util.List;
-import java.util.Map;
-
 import com.lchnan.dormitory.entity.User;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
 

@@ -1,11 +1,9 @@
 package com.lchnan.dormitory.service;
 
-import com.lchnan.dormitory.entity.User;
-import com.lchnan.dormitory.mapper.UserMapper;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
+import com.lchnan.dormitory.entity.User;
+import com.lchnan.dormitory.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

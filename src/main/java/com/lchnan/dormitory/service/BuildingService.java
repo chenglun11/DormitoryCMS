@@ -1,9 +1,9 @@
 package com.lchnan.dormitory.service;
 
-import com.lchnan.dormitory.mapper.BuildingMapper;
-import com.lchnan.dormitory.entity.Building;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lchnan.dormitory.entity.Building;
+import com.lchnan.dormitory.mapper.BuildingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

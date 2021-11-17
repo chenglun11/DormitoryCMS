@@ -1,9 +1,8 @@
 package com.lchnan.dormitory.mapper;
 
-import java.util.List;
-import java.util.Map;
-
 import com.lchnan.dormitory.entity.Student;
+
+import java.util.List;
 
 public interface StudentMapper {
 

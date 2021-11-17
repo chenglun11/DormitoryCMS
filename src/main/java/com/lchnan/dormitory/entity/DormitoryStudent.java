@@ -1,8 +1,7 @@
 package com.lchnan.dormitory.entity;
 
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 import com.lchnan.dormitory.utils.Entity;
+
 import java.util.Date;
 
 

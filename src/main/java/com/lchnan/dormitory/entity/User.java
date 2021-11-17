@@ -1,12 +1,9 @@
 package com.lchnan.dormitory.entity;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.Length;
 import com.lchnan.dormitory.utils.Entity;
-import java.util.Date;
+import org.hibernate.validator.constraints.Length;
 
 
 /**

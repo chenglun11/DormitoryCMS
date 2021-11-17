@@ -1,9 +1,5 @@
 package com.lchnan.dormitory.utils;
 
-import com.lchnan.dormitory.mapper.RecordMapper;
-
-import java.sql.ResultSet;
-
 /**
  * @author admin@lchnan.cn
  * @date 2021/11/16 14:45
