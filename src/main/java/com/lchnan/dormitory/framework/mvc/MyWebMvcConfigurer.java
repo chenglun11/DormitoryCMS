@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -14,6 +15,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
+
+    /*解决token无法跨域的问题*/
+    @Bean
+    public TokenInterceptor tokenInterceptor(){
+        return new TokenInterceptor();
+    }
+    /*放开token与登陆*/
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(tokenInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/login");
+    }
 
     /*使用CorsFilter解决跨域问题*/
     @Bean
@@ -30,6 +43,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         /*拦截所有请求，配置文件为：corsConfiguration*/
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
+
 
         /*返回过滤器*/
         CorsFilter corsFilter = new CorsFilter(urlBasedCorsConfigurationSource);
