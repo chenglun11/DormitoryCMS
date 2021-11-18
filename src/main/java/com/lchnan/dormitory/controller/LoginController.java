@@ -4,6 +4,7 @@ import com.lchnan.dormitory.entity.User;
 import com.lchnan.dormitory.framework.jwt.JwtUtil;
 import com.lchnan.dormitory.service.UserService;
 import com.lchnan.dormitory.utils.Result;
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +30,8 @@ public class LoginController {
         if(entity != null) {
             String token = JwtUtil.sign(entity);
             Map map = new HashMap();
-            map.put("token",token);
-            map.put("user",user);
+            map.put(JwtUtil.token,token);
+            map.put("user",entity);
             return Result.ok("登录成功", map);
         }else {
             return Result.fail("用户名或密码错误");
