@@ -3,10 +3,9 @@ package com.lchnan.dormitory.controller;
 import com.github.pagehelper.PageInfo;
 import com.lchnan.dormitory.entity.User;
 import com.lchnan.dormitory.service.UserService;
+import com.lchnan.dormitory.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author admin@lchnan.cn
@@ -20,12 +19,15 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("create")
-    public void create(){
-        User user = new User();
-        user.setName("admin");
-        user.setUserName("admin");
-        user.setPassword("123456");
-        userService.create(user);       //对用户进行创建
+    public Result create(@RequestBody User user){
+        int flag = userService.create(user);
+
+        if(flag > 0 ){
+            return Result.ok("ok");
+        }else {
+            return Result.fail();
+        }
+
     }
 
     @GetMapping("delete")

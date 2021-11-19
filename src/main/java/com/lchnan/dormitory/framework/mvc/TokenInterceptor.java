@@ -22,6 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 		String newToken = JwtUtil.sign(user);
 		response.setHeader(JwtUtil.token,newToken);
 		request.setAttribute("user",user);
+		response.setHeader("Access-Control-Expose-Header",token);
 		return true;
 	}
 

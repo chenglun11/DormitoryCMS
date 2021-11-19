@@ -1,5 +1,10 @@
 package com.lchnan.dormitory.utils;
 
+import com.github.pagehelper.PageInfo;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author admin@lchnan.cn
  * @date 2021/11/16 14:45
@@ -12,6 +17,17 @@ public class Result {
     private Integer code;
     private String msg;
     private Object data = null;
+
+    public static Map<String, Object> ok(PageInfo pageInfo){
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("code",SUCCESS_CODE);
+        map.put("msg","正常");
+        map.put("count", pageInfo.getTotal());
+        map.put("data", pageInfo.getList());
+
+        return map;
+    }
 
     public Integer getCode() {
         return code;

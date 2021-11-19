@@ -5,7 +5,7 @@ package com.lchnan.dormitory.utils;
  * @date 2021/11/12 21:34
  */
 public class Entity{
-    private Integer page;
+    private Integer page = 1;
 
     private Integer limit = 10; /*页面大小*/
 
