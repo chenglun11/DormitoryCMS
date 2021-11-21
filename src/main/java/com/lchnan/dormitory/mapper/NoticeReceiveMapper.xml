@@ -2,59 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.NoticeReceiveMapper">
 
-	<resultMap type="com.lchnan.dormitory.entity.NoticeReceive" id="NoticeReceive">
-		<id column="id" property="id"/>
-		<result column="notice_id"  property="noticeId"/>
-		<result column="building_id"  property="buildingId"/>
-	</resultMap>
+    <resultMap type="com.lchnan.dormitory.entity.NoticeReceive" id="NoticeReceive">
+        <id column="id" property="id"/>
+        <result column="notice_id" property="noticeId"/>
+        <result column="building_id" property="buildingId"/>
+    </resultMap>
 
-	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.NoticeReceive">
-		insert into tb_notice_receive(
-			notice_id,
-			building_id
-		)values(
-			#{noticeId},
-			#{buildingId}
-		)
-	</insert>
+    <insert id="create" keyProperty="id" useGeneratedKeys="true"
+            parameterType="com.lchnan.dormitory.entity.NoticeReceive">
+        insert into tb_notice_receive(notice_id,
+                                      building_id)
+        values (#{noticeId},
+                #{buildingId})
+    </insert>
 
-	<select id="query" resultMap="NoticeReceive">
-		select * from tb_notice_receive
-		<include refid="NoticeReceiveFindCriteria"/>
-	</select>
+    <select id="query" resultMap="NoticeReceive">
+        select * from tb_notice_receive
+        <include refid="NoticeReceiveFindCriteria"/>
+    </select>
 
-	<select id="count" resultType="int">
-		select count(1) from tb_notice_receive
-		<include refid="NoticeReceiveFindCriteria"/>
-	</select>
+    <select id="count" resultType="int">
+        select count(1) from tb_notice_receive
+        <include refid="NoticeReceiveFindCriteria"/>
+    </select>
 
-	<select id="detail" resultMap="NoticeReceive">
-		select * from tb_notice_receive where id = #{id}
-	</select>
+    <select id="detail" resultMap="NoticeReceive">
+        select *
+        from tb_notice_receive
+        where id = #{id}
+    </select>
 
-	<delete id="delete">
-		delete from tb_notice_receive where id = #{id}
-	</delete>
-	<update id="update">
-		update tb_notice_receive set
-			notice_id=#{noticeId},
-			building_id=#{buildingId}
-		where id = #{id}
-	</update>
+    <delete id="delete">
+        delete
+        from tb_notice_receive
+        where id = #{id}
+    </delete>
 
-	<update id="updateSelective">
-		update tb_notice_receive set
-			<if test="noticeId != null">notice_id = #{noticeId}</if>,
-			<if test="buildingId != null">building_id = #{buildingId}</if>
-		where id = #{id}
-	</update>
+    <delete id="deleteByNoticeId">
+        delete
+        from tb_notice_receive
+        where notice_id = #{noticeId}
+    </delete>
 
-	<sql id="NoticeReceiveFindCriteria">
-		<where>
-			<if test="id != null">and id = #{id}</if>
-			<if test="noticeId != null">and notice_id = #{noticeId}</if>
-			<if test="buildingId != null">and building_id = #{buildingId}</if>
-		</where>
-	</sql>
+    <update id="update">
+        update tb_notice_receive
+        set notice_id=#{noticeId},
+            building_id=#{buildingId}
+        where id = #{id}
+    </update>
+
+    <update id="updateSelective">
+        update tb_notice_receive set
+        <if test="noticeId != null">notice_id = #{noticeId}</if>,
+        <if test="buildingId != null">building_id = #{buildingId}</if>
+        where id = #{id}
+    </update>
+
+    <sql id="NoticeReceiveFindCriteria">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="noticeId != null">and notice_id = #{noticeId}</if>
+            <if test="buildingId != null">and building_id = #{buildingId}</if>
+        </where>
+    </sql>
 
 </mapper>

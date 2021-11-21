@@ -2,82 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.RepairMapper">
 
-	<resultMap type="com.lchnan.dormitory.entity.Repair" id="Repair">
-		<id column="id" property="id"/>
-		<result column="student_id"  property="studentId"/>
-		<result column="dormitory_id"  property="dormitoryId"/>
-		<result column="building_id"  property="buildingId"/>
-		<result column="description"  property="description"/>
-		<result column="create_date"  property="createDate"/>
-		<result column="status"  property="status"/>
-	</resultMap>
+    <resultMap type="com.lchnan.dormitory.entity.Repair" id="Repair">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="dormitory_id" property="dormitoryId"/>
+        <result column="building_id" property="buildingId"/>
+        <result column="description" property="description"/>
+        <result column="create_date" property="createDate"/>
+        <result column="status" property="status"/>
+    </resultMap>
 
-	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Repair">
-		insert into tb_repair(
-			student_id,
-			dormitory_id,
-			building_id,
-			description,
-			create_date,
-			status
-		)values(
-			#{studentId},
-			#{dormitoryId},
-			#{buildingId},
-			#{description},
-			#{createDate},
-			#{status}
-		)
-	</insert>
+    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Repair">
+        insert into tb_repair(student_id,
+                              dormitory_id,
+                              building_id,
+                              description,
+                              create_date,
+                              status)
+        values (#{studentId},
+                #{dormitoryId},
+                #{buildingId},
+                #{description},
+                #{createDate},
+                #{status})
+    </insert>
 
-	<select id="query" resultMap="Repair">
-		select * from tb_repair
-		<include refid="RepairFindCriteria"/>
-	</select>
+    <select id="query" resultMap="Repair">
+        select * from tb_repair
+        <include refid="RepairFindCriteria"/>
+    </select>
 
-	<select id="count" resultType="int">
-		select count(1) from tb_repair
-		<include refid="RepairFindCriteria"/>
-	</select>
+    <select id="count" resultType="int">
+        select count(1) from tb_repair
+        <include refid="RepairFindCriteria"/>
+    </select>
 
-	<select id="detail" resultMap="Repair">
-		select * from tb_repair where id = #{id}
-	</select>
+    <select id="detail" resultMap="Repair">
+        select *
+        from tb_repair
+        where id = #{id}
+    </select>
 
-	<delete id="delete">
-		delete from tb_repair where id = #{id}
-	</delete>
-	<update id="update">
-		update tb_repair set
-			student_id=#{studentId},
-			dormitory_id=#{dormitoryId},
-			building_id=#{buildingId},
-			description=#{description},
-			create_date=#{createDate},
-			status=#{status}
-		where id = #{id}
-	</update>
+    <delete id="delete">
+        delete
+        from tb_repair
+        where id = #{id}
+    </delete>
+    <update id="update">
+        update tb_repair
+        set student_id=#{studentId},
+            dormitory_id=#{dormitoryId},
+            building_id=#{buildingId},
+            description=#{description},
+            create_date=#{createDate},
+            status=#{status}
+        where id = #{id}
+    </update>
 
-	<update id="updateSelective">
-		update tb_repair set
-			<if test="studentId != null">student_id = #{studentId}</if>,
-			<if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
-			<if test="buildingId != null">building_id = #{buildingId}</if>,
-			<if test="description != null and description != ''"> description = #{description}</if>,
-			<if test="createDate != null and createDate != ''"> create_date = #{createDate}</if>,
-			<if test="status != null">status = #{status}</if>
-		where id = #{id}
-	</update>
+    <update id="updateSelective">
+        update tb_repair
+        <set>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="dormitoryId != null">dormitory_id = #{dormitoryId},</if>
+            <if test="buildingId != null">building_id = #{buildingId},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="createDate != null and createDate != ''">create_date = #{createDate},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
 
-	<sql id="RepairFindCriteria">
-		<where>
-			<if test="id != null">and id = #{id}</if>
-			<if test="studentId != null">and student_id = #{studentId}</if>
-			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
-			<if test="buildingId != null">and building_id = #{buildingId}</if>
-			<if test="description != null and description != ''">and description = #{description}</if>
-			<if test="status != null">and status = #{status}</if>
-		</where>
-	</sql>
+    <sql id="RepairFindCriteria">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="studentId != null">and student_id = #{studentId}</if>
+            <if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+            <if test="buildingId != null">and building_id = #{buildingId}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="status != null">and status = #{status}</if>
+        </where>
+    </sql>
 
 </mapper>

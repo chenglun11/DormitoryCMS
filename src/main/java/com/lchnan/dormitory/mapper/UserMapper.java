@@ -7,20 +7,20 @@ import java.util.List;
 
 public interface UserMapper {
 
-	int create(User user);
+	public int create(User user);
 
-	int delete(Integer id);
+	public int delete(Integer id);
 
-	int update(User user);
+	public int update(User user);
 
-	int updateSelective(User user);
+	public int updateSelective(User user);
 
-	List<User> query(User user);
+	public List<User> query(User user);
 
-	User detail(Integer id);
+	public User detail(Integer id);
 
-	User login(@Param("userName") String userName, @Param("password") String password);
+	public User login(@Param("userName") String userName, @Param("password") String password);
 
-	int count(User user);
+	public int count(User user);
 
 }

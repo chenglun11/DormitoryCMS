@@ -2,59 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.BedMapper">
 
-	<resultMap type="com.lchnan.dormitory.entity.Bed" id="Bed">
-		<id column="id" property="id"/>
-		<result column="bno"  property="bno"/>
-		<result column="dormitory_id"  property="dormitoryId"/>
-	</resultMap>
+    <resultMap type="com.lchnan.dormitory.entity.Bed" id="Bed">
+        <id column="id" property="id"/>
+        <result column="bno" property="bno"/>
+        <result column="dormitory_id" property="dormitoryId"/>
+    </resultMap>
 
-	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Bed">
-		insert into tb_bed(
-			bno,
-			dormitory_id
-		)values(
-			#{bno},
-			#{dormitoryId}
-		)
-	</insert>
+    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Bed">
+        insert into tb_bed(bno,
+                           dormitory_id)
+        values (#{bno},
+                #{dormitoryId})
+    </insert>
 
-	<select id="query" resultMap="Bed">
-		select * from tb_bed
-		<include refid="BedFindCriteria"/>
-	</select>
+    <select id="query" resultMap="Bed">
+        select * from tb_bed
+        <include refid="BedFindCriteria"/>
+    </select>
 
-	<select id="count" resultType="int">
-		select count(1) from tb_bed
-		<include refid="BedFindCriteria"/>
-	</select>
+    <select id="count" resultType="int">
+        select count(1) from tb_bed
+        <include refid="BedFindCriteria"/>
+    </select>
 
-	<select id="detail" resultMap="Bed">
-		select * from tb_bed where id = #{id}
-	</select>
+    <select id="detail" resultMap="Bed">
+        select *
+        from tb_bed
+        where id = #{id}
+    </select>
 
-	<delete id="delete">
-		delete from tb_bed where id = #{id}
-	</delete>
-	<update id="update">
-		update tb_bed set
-			bno=#{bno},
-			dormitory_id=#{dormitoryId}
-		where id = #{id}
-	</update>
+    <delete id="delete">
+        delete
+        from tb_bed
+        where id = #{id}
+    </delete>
 
-	<update id="updateSelective">
-		update tb_bed set
-			<if test="bno != null and bno != ''"> bno = #{bno}</if>,
-			<if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>
-		where id = #{id}
-	</update>
+    <delete id="deleteByDormitoryId">
+        delete
+        from tb_bed
+        where dormitory_id = #{dormitoryId}
+    </delete>
 
-	<sql id="BedFindCriteria">
-		<where>
-			<if test="id != null">and id = #{id}</if>
-			<if test="bno != null and bno != ''">and bno = #{bno}</if>
-			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
-		</where>
-	</sql>
+    <update id="update">
+        update tb_bed
+        set bno=#{bno},
+            dormitory_id=#{dormitoryId}
+        where id = #{id}
+    </update>
+
+    <update id="updateSelective">
+        update tb_bed set
+        <if test="bno != null and bno != ''">bno = #{bno}</if>,
+        <if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>
+        where id = #{id}
+    </update>
+
+    <sql id="BedFindCriteria">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="bno != null and bno != ''">and bno = #{bno}</if>
+            <if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+        </where>
+    </sql>
 
 </mapper>

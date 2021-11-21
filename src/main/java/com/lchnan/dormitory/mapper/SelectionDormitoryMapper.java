@@ -10,6 +10,8 @@ public interface SelectionDormitoryMapper {
 
 	public int delete(Integer id);
 
+	public int deleteByClazzId(Integer clazzId);
+
 	public int update(SelectionDormitory selectionDormitory);
 
 	public int updateSelective(SelectionDormitory selectionDormitory);

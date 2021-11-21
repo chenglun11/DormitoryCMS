@@ -6,26 +6,25 @@ import java.util.Date;
 
 
 /**
- * 
- * @author admin@lchnan.cn
- * @time 2021-11-13 12:14:11
+ * @author 1137050697@qq.com
+ * @time 2021-11-21 14:27:15
  */
-public class Record extends Entity{
+public class Record extends Entity {
 
 	/**
-	 * 
+	 *
 	 */
 	private Integer id;
 	/**
-	 * 
+	 *
 	 */
 	private Integer studentId;
 	/**
-	 * 
+	 *
 	 */
 	private Integer dormitoryId;
 	/**
-	 * 
+	 *
 	 */
 	private Integer bedId;
 	/**
@@ -33,43 +32,54 @@ public class Record extends Entity{
 	 */
 	private Integer status;
 	/**
-	 * 
+	 *
 	 */
 	private Date createDate;
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getStudentId() {
 		return studentId;
 	}
+
 	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
 	}
+
 	public Integer getDormitoryId() {
 		return dormitoryId;
 	}
+
 	public void setDormitoryId(Integer dormitoryId) {
 		this.dormitoryId = dormitoryId;
 	}
+
 	public Integer getBedId() {
 		return bedId;
 	}
+
 	public void setBedId(Integer bedId) {
 		this.bedId = bedId;
 	}
+
 	public Integer getStatus() {
 		return status;
 	}
+
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}

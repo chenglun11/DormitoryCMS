@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan({"com.lchnan.dormitory.mapper"})
 public class DormitoryApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DormitoryApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(DormitoryApplication.class, args);
+	}
 
 }

@@ -1,52 +1,18 @@
 package com.lchnan.dormitory.entity;
 
-import com.lchnan.dormitory.utils.Entity;
-import org.hibernate.validator.constraints.Length;
-
 import java.util.List;
 
+public class Menu {
 
-/**
- * @author admin@lchnan.cn
- * @time 2021-11-13 12:14:11
- */
-public class Menu extends Entity {
-
-	/**
-	 *
-	 */
 	private Integer id;
-	/**
-	 *
-	 */
-	@Length(max = 0)
 	private String title;
-	/**
-	 *
-	 */
-	@Length(max = 0)
 	private String icon;
-	/**
-	 *
-	 */
-	@Length(max = 0)
 	private String href;
-	/**
-	 *
-	 */
-	@Length(max = 0)
 	private String target;
-	/**
-	 *
-	 */
 	private Integer parentId;
-	/**
-	 * 0:管理员/宿管员功能：1：学生
-	 */
 	private Integer type;
 
 	private List<Menu> child;
-
 
 	public Integer getId() {
 		return id;

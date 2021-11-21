@@ -10,6 +10,8 @@ public interface SelectionJoinerMapper {
 
 	public int delete(Integer id);
 
+	public int deleteBySelectionId(Integer selectionId);
+
 	public int update(SelectionJoiner selectionJoiner);
 
 	public int updateSelective(SelectionJoiner selectionJoiner);

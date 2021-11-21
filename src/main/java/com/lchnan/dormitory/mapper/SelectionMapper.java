@@ -16,6 +16,8 @@ public interface SelectionMapper {
 
 	public List<Selection> query(Selection selection);
 
+	public List<Selection> queryByClazzId(Integer clazzId);
+
 	public Selection detail(Integer id);
 
 	public int count(Selection selection);

@@ -1,6 +1,6 @@
 package com.lchnan.dormitory.framework.exception;
 
-public class exc extends RuntimeException{
+public class exc extends RuntimeException {
 
 	public exc() {
 	}

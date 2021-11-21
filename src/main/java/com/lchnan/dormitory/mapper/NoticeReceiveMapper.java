@@ -10,6 +10,8 @@ public interface NoticeReceiveMapper {
 
 	public int delete(Integer id);
 
+	public int deleteByNoticeId(Integer noticeId);
+
 	public int update(NoticeReceive noticeReceive);
 
 	public int updateSelective(NoticeReceive noticeReceive);

@@ -2,95 +2,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.StudentMapper">
 
-	<resultMap type="com.lchnan.dormitory.entity.Student" id="Student">
-		<id column="id" property="id"/>
-		<result column="stu_no"  property="stuNo"/>
-		<result column="name"  property="name"/>
-		<result column="idcard"  property="idcard"/>
-		<result column="grade_id"  property="gradeId"/>
-		<result column="sex"  property="sex"/>
-		<result column="phone"  property="phone"/>
-		<result column="password"  property="password"/>
-		<result column="clazz_id"  property="clazzId"/>
-	</resultMap>
+    <resultMap type="com.lchnan.dormitory.entity.Student" id="Student">
+        <id column="id" property="id"/>
+        <result column="stu_no" property="stuNo"/>
+        <result column="name" property="name"/>
+        <result column="idcard" property="idcard"/>
+        <result column="grade_id" property="gradeId"/>
+        <result column="sex" property="sex"/>
+        <result column="phone" property="phone"/>
+        <result column="password" property="password"/>
+        <result column="clazz_id" property="clazzId"/>
+    </resultMap>
 
-	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Student">
-		insert into tb_student(
-			stu_no,
-			name,
-			idcard,
-			grade_id,
-			sex,
-			phone,
-			password,
-			clazz_id
-		)values(
-			#{stuNo},
-			#{name},
-			#{idcard},
-			#{gradeId},
-			#{sex},
-			#{phone},
-			#{password},
-			#{clazzId}
-		)
-	</insert>
+    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Student">
+        insert into tb_student(stu_no,
+                               name,
+                               idcard,
+                               grade_id,
+                               sex,
+                               phone,
+                               password,
+                               clazz_id)
+        values (#{stuNo},
+                #{name},
+                #{idcard},
+                #{gradeId},
+                #{sex},
+                #{phone},
+                '123456',
+                #{clazzId})
+    </insert>
 
-	<select id="query" resultMap="Student">
-		select * from tb_student
-		<include refid="StudentFindCriteria"/>
-	</select>
+    <select id="query" resultMap="Student">
+        select * from tb_student
+        <include refid="StudentFindCriteria"/>
+    </select>
 
-	<select id="count" resultType="int">
-		select count(1) from tb_student
-		<include refid="StudentFindCriteria"/>
-	</select>
+    <select id="count" resultType="int">
+        select count(1) from tb_student
+        <include refid="StudentFindCriteria"/>
+    </select>
 
-	<select id="detail" resultMap="Student">
-		select * from tb_student where id = #{id}
-	</select>
+    <select id="detail" resultMap="Student">
+        select *
+        from tb_student
+        where id = #{id}
+    </select>
 
-	<delete id="delete">
-		delete from tb_student where id = #{id}
-	</delete>
-	<update id="update">
-		update tb_student set
-			stu_no=#{stuNo},
-			name=#{name},
-			idcard=#{idcard},
-			grade_id=#{gradeId},
-			sex=#{sex},
-			phone=#{phone},
-			password=#{password},
-			clazz_id=#{clazzId}
-		where id = #{id}
-	</update>
+    <delete id="delete">
+        delete
+        from tb_student
+        where id = #{id}
+    </delete>
+    <update id="update">
+        update tb_student
+        set stu_no=#{stuNo},
+            name=#{name},
+            idcard=#{idcard},
+            grade_id=#{gradeId},
+            sex=#{sex},
+            phone=#{phone},
+            password=#{password},
+            clazz_id=#{clazzId}
+        where id = #{id}
+    </update>
 
-	<update id="updateSelective">
-		update tb_student set
-			<if test="stuNo != null and stuNo != ''"> stu_no = #{stuNo}</if>,
-			<if test="name != null and name != ''"> name = #{name}</if>,
-			<if test="idcard != null and idcard != ''"> idcard = #{idcard}</if>,
-			<if test="gradeId != null">grade_id = #{gradeId}</if>,
-			<if test="sex != null">sex = #{sex}</if>,
-			<if test="phone != null and phone != ''"> phone = #{phone}</if>,
-			<if test="password != null and password != ''"> password = #{password}</if>,
-			<if test="clazzId != null">clazz_id = #{clazzId}</if>
-		where id = #{id}
-	</update>
+    <update id="updateSelective">
+        update tb_student
+        <set>
+            <if test="stuNo != null and stuNo != ''">stu_no = #{stuNo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="idcard != null and idcard != ''">idcard = #{idcard},</if>
+            <if test="gradeId != null">grade_id = #{gradeId},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="clazzId != null">clazz_id = #{clazzId},</if>
+        </set>
+        where id = #{id}
+    </update>
 
-	<sql id="StudentFindCriteria">
-		<where>
-			<if test="id != null">and id = #{id}</if>
-			<if test="stuNo != null and stuNo != ''">and stu_no = #{stuNo}</if>
-			<if test="name != null and name != ''">and name = #{name}</if>
-			<if test="idcard != null and idcard != ''">and idcard = #{idcard}</if>
-			<if test="gradeId != null">and grade_id = #{gradeId}</if>
-			<if test="sex != null">and sex = #{sex}</if>
-			<if test="phone != null and phone != ''">and phone = #{phone}</if>
-			<if test="password != null and password != ''">and password = #{password}</if>
-			<if test="clazzId != null">and clazz_id = #{clazzId}</if>
-		</where>
-	</sql>
+    <sql id="StudentFindCriteria">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="stuNo != null and stuNo != ''">and stu_no = #{stuNo}</if>
+            <if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
+            <if test="idcard != null and idcard != ''">and idcard = #{idcard}</if>
+            <if test="gradeId != null">and grade_id = #{gradeId}</if>
+            <if test="sex != null">and sex = #{sex}</if>
+            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="clazzId != null">and clazz_id = #{clazzId}</if>
+        </where>
+    </sql>
+
+    <select id="login" resultMap="Student">
+        select *
+        from tb_student
+        where stu_no = #{userName}
+          and password = #{password}
+    </select>
 
 </mapper>

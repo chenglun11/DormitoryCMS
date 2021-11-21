@@ -2,53 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.GradeMapper">
 
-	<resultMap type="com.lchnan.dormitory.entity.Grade" id="Grade">
-		<id column="id" property="id"/>
-		<result column="name"  property="name"/>
-	</resultMap>
+    <resultMap type="com.lchnan.dormitory.entity.Grade" id="Grade">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
 
-	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Grade">
-		insert into tb_grade(
-			name
-		)values(
-			#{name}
-		)
-	</insert>
+    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Grade">
+        insert into tb_grade(name)
+        values (#{name})
+    </insert>
 
-	<select id="query" resultMap="Grade">
-		select * from tb_grade
-		<include refid="GradeFindCriteria"/>
-	</select>
+    <select id="query" resultMap="Grade">
+        select * from tb_grade
+        <include refid="GradeFindCriteria"/>
+    </select>
 
-	<select id="count" resultType="int">
-		select count(1) from tb_grade
-		<include refid="GradeFindCriteria"/>
-	</select>
+    <select id="count" resultType="int">
+        select count(1) from tb_grade
+        <include refid="GradeFindCriteria"/>
+    </select>
 
-	<select id="detail" resultMap="Grade">
-		select * from tb_grade where id = #{id}
-	</select>
+    <select id="detail" resultMap="Grade">
+        select *
+        from tb_grade
+        where id = #{id}
+    </select>
 
-	<delete id="delete">
-		delete from tb_grade where id = #{id}
-	</delete>
-	<update id="update">
-		update tb_grade set
-			name=#{name}
-		where id = #{id}
-	</update>
+    <delete id="delete">
+        delete
+        from tb_grade
+        where id = #{id}
+    </delete>
+    <update id="update">
+        update tb_grade
+        set name=#{name}
+        where id = #{id}
+    </update>
 
-	<update id="updateSelective">
-		update tb_grade set
-			<if test="name != null and name != ''"> name = #{name}</if>
-		where id = #{id}
-	</update>
+    <update id="updateSelective">
+        update tb_grade set
+        <if test="name != null and name != ''">name = #{name}</if>
+        where id = #{id}
+    </update>
 
-	<sql id="GradeFindCriteria">
-		<where>
-			<if test="id != null">and id = #{id}</if>
-			<if test="name != null and name != ''">and name = #{name}</if>
-		</where>
-	</sql>
+    <sql id="GradeFindCriteria">
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+        </where>
+    </sql>
 
 </mapper>

@@ -20,4 +20,5 @@ public interface OrgMapper {
 
 	public int count(Org org);
 
+	public List<Org> queryOrgBySelectionId(Integer selectionId);
 }

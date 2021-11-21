@@ -11,49 +11,49 @@ import org.springframework.util.StringUtils;
 @Service
 public class DormitorySetService {
 
-    @Autowired
-    private DormitorySetMapper dormitorySetMapper;
+	@Autowired
+	private DormitorySetMapper dormitorySetMapper;
 
-    public int create(DormitorySet dormitorySet) {
-        return dormitorySetMapper.create(dormitorySet);
-    }
+	public int create(DormitorySet dormitorySet) {
+		return dormitorySetMapper.create(dormitorySet);
+	}
 
-    public int delete(String ids) {
-        String[] arr = ids.split(",");
-        int row = 0;
-        for (String s : arr) {
-            if(!StringUtils.isEmpty(s)){
-                dormitorySetMapper.delete(Integer.parseInt(s));
-            row++;
-            }
-        }
-        return row;
-    }
+	public int delete(String ids) {
+		String[] arr = ids.split(",");
+		int row = 0;
+		for (String s : arr) {
+			if (!StringUtils.isEmpty(s)) {
+				dormitorySetMapper.delete(Integer.parseInt(s));
+				row++;
+			}
+		}
+		return row;
+	}
 
-    public int delete(Integer id) {
-        return dormitorySetMapper.delete(id);
-    }
+	public int delete(Integer id) {
+		return dormitorySetMapper.delete(id);
+	}
 
-    public int update(DormitorySet dormitorySet) {
-        return dormitorySetMapper.update(dormitorySet);
-    }
+	public int update(DormitorySet dormitorySet) {
+		return dormitorySetMapper.update(dormitorySet);
+	}
 
-    public int updateSelective(DormitorySet dormitorySet) {
-        return dormitorySetMapper.updateSelective(dormitorySet);
-    }
+	public int updateSelective(DormitorySet dormitorySet) {
+		return dormitorySetMapper.updateSelective(dormitorySet);
+	}
 
-    public PageInfo<DormitorySet> query(DormitorySet dormitorySet) {
-        if(dormitorySet != null && dormitorySet.getPage() != null){
-            PageHelper.startPage(dormitorySet.getPage(),dormitorySet.getLimit());
-        }
-        return new PageInfo<DormitorySet>(dormitorySetMapper.query(dormitorySet));
-    }
+	public PageInfo<DormitorySet> query(DormitorySet dormitorySet) {
+		if (dormitorySet != null && dormitorySet.getPage() != null) {
+			PageHelper.startPage(dormitorySet.getPage(), dormitorySet.getLimit());
+		}
+		return new PageInfo<DormitorySet>(dormitorySetMapper.query(dormitorySet));
+	}
 
-    public DormitorySet detail(Integer id) {
-        return dormitorySetMapper.detail(id);
-    }
+	public DormitorySet detail(Integer id) {
+		return dormitorySetMapper.detail(id);
+	}
 
-    public int count(DormitorySet dormitorySet) {
-        return dormitorySetMapper.count(dormitorySet);
-    }
+	public int count(DormitorySet dormitorySet) {
+		return dormitorySetMapper.count(dormitorySet);
+	}
 }

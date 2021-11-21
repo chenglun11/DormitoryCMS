@@ -20,4 +20,5 @@ public interface StudentMapper {
 
 	public int count(Student student);
 
+	public Student login(String userName, String password);
 }

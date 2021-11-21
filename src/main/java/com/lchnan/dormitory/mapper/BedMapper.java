@@ -10,6 +10,8 @@ public interface BedMapper {
 
 	public int delete(Integer id);
 
+	public int deleteByDormitoryId(Integer dormitoryId);
+
 	public int update(Bed bed);
 
 	public int updateSelective(Bed bed);

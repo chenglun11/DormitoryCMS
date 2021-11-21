@@ -1,58 +1,111 @@
 package com.lchnan.dormitory.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.lchnan.dormitory.entity.Student;
 import com.lchnan.dormitory.entity.User;
+import com.lchnan.dormitory.service.StudentService;
 import com.lchnan.dormitory.service.UserService;
 import com.lchnan.dormitory.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+
 /**
- * @author admin@lchnan.cn
- * @date 2021/11/9 11:23
+ * @author 1137050697@qq.com
+ * @Description:
+ * @date 2020/11/1720:07
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private StudentService studentService;
 
-    @GetMapping("create")
-    public Result create(@RequestBody User user){
-        int flag = userService.create(user);
+	@PostMapping("create")
+	public Result create(@RequestBody User user) {
+		int flag = userService.create(user);
+		if (flag > 0) {
+			return Result.ok();
+		} else {
+			return Result.fail();
+		}
+	}
 
-        if(flag > 0 ){
-            return Result.ok("ok");
-        }else {
-            return Result.fail();
-        }
+	@GetMapping("delete")
+	public Result delete(String ids) {
+		int flag = userService.delete(ids);
+		if (flag > 0) {
+			return Result.ok();
+		} else {
+			return Result.fail();
+		}
+	}
 
-    }
+	@PostMapping("update")
+	public Result update(@RequestBody User user) {
+		int flag = userService.updateSelective(user);
+		if (flag > 0) {
+			return Result.ok();
+		} else {
+			return Result.fail();
+		}
+	}
 
-    @GetMapping("delete")
-    public void delete(Integer id){
-        userService.delete(id);         //对用户进行删除
-    }
+	@GetMapping("detail")
+	public User detail(Integer id) {
+		return userService.detail(id);
+	}
 
-    @GetMapping("update")
-    public void update(){
-        User user = new User();
-        user.setName("adminxx");
-        user.setUserName("adminxx");
-        user.setPassword("123456xx");
-        user.setId(1);
-        userService.create(user);   //对用户进行修改
-    }
+	@GetMapping("info")
+	public Result info(HttpServletRequest request) {
+		User user = (User) request.getAttribute("user");
+		return Result.ok(userService.detail(user.getId()));
+	}
 
-    @GetMapping("detail")
-    public User detail(Integer id){
-        return userService.detail(id);         //对用户进行删除
-    }
+	@PostMapping("pwd")
+	public Result pwd(@RequestBody Map<String, String> map, HttpServletRequest request) {
+		String spassword = map.get("spassword");
+		String npassword = map.get("npassword");
+		//用户修改
+		if (request.getAttribute("user") != null) {
+			User user = (User) request.getAttribute("user");
+			User entity = userService.detail(user.getId());
+			if (entity.getPassword().equals(spassword)) {
+				User param = new User();
+				param.setId(entity.getId());
+				param.setPassword(npassword);
+				userService.updatePwd(param);
+				return Result.ok("修改密码成功");
+			} else {
+				return Result.fail("原密码错误");
+			}
+		}
+		//学生修改
+		if (request.getAttribute("student") != null) {
+			Student student = (Student) request.getAttribute("student");
+			Student entity = studentService.detail(student.getId());
+			if (entity.getPassword().equals(spassword)) {
+				Student param = new Student();
+				param.setId(entity.getId());
+				param.setPassword(npassword);
+				studentService.updateSelective(param);
+				return Result.ok("修改密码成功");
+			} else {
+				return Result.fail("原密码错误");
+			}
+		}
+		return Result.ok();
+	}
 
-    @GetMapping("query")
-    public PageInfo<User> query(User user){
+	@PostMapping("query")
+	public Map<String, Object> query(@RequestBody User user) {
+		PageInfo<User> pageInfo = userService.query(user);
+		return Result.ok(pageInfo);
+	}
 
-        return userService.query(user);
-    }
 }

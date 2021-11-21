@@ -16,6 +16,8 @@ public interface NoticeMapper {
 
 	public List<Notice> query(Notice notice);
 
+	public List<Notice> queryByBuildingId(Notice notice);
+
 	public Notice detail(Integer id);
 
 	public int count(Notice notice);
