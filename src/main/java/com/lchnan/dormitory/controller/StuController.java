@@ -162,23 +162,24 @@ public class StuController {
 
 
 	@PostMapping("notice_query")
-	public Map<String, Object> notice_query(@RequestBody Notice notice, HttpServletRequest request) {
-		Student param = (Student) request.getAttribute("student");
+	public Map<String, Object> notice_query(@RequestBody Notice notice, HttpServletRequest request){
+		Student param = (Student)request.getAttribute("student");
 		DormitoryStudent ds = new DormitoryStudent();
 		ds.setStudentId(param.getId());
 		PageInfo<Notice> noticePageInfo = null;
 		PageInfo<DormitoryStudent> pageInfo = dormitoryStudentService.query(ds);
-		if (pageInfo.getList() != null && pageInfo.getList().size() > 0) {
+		if(pageInfo.getList() != null && pageInfo.getList().size()>0){
 			DormitoryStudent dormitoryStudent = pageInfo.getList().get(0);
 			Dormitory detail = dormitoryService.detail(dormitoryStudent.getDormitoryId());
 			notice.setBuildingId(detail.getBuildingId());
 			noticePageInfo = noticeService.queryByBuildingId(notice);
-			noticePageInfo.getList().forEach(entity -> {
+			noticePageInfo.getList().forEach(entity->{
 				entity.setUser(userService.detail(entity.getUserId()));
 			});
 			return Result.ok(noticePageInfo);
-		} else {
+		}else{
 			return Result.ok(noticePageInfo);
 		}
 	}
 }
+

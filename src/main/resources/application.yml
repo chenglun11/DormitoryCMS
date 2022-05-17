@@ -1,25 +1,30 @@
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:3306/dormitory_lastest?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: lichengan0717
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Shanghai
+
 server:
   port: 8888
   servlet:
     context-path: /dormitory
 
 mybatis:
-  mapper-locations: com/lchnan/dormitory/mapper/*.xml
+  mapper-locations: com/yanzhen/mapper/*.xml
 
 logging:
   level:
     com:
-      lchnan:
-        dormitory:
-          mapper: debug
-#打开debug
+      yanzhen:
+        mapper: debug
+
+
 
 pagehelper:
-  auto-dialect: true
-#修改pagehelper的语法
+  helper-dialect: mysql
