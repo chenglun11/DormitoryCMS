@@ -5,34 +5,34 @@ import org.hibernate.validator.constraints.Length;
 
 
 /**
- * @author 1137050697@qq.com
- * @time 2021-11-21 14:27:15
+ * @author 596183363@qq.com
+ * @time 2020-11-21 14:27:15
  */
 public class Grade extends Entity {
 
-	/**
-	 *
-	 */
-	private Integer id;
-	/**
-	 *
-	 */
-	@Length(max = 100)
-	private String name;
+    /**
+     *
+     */
+    private Integer id;
+    /**
+     *
+     */
+    @Length(max = 100)
+    private String name;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 }

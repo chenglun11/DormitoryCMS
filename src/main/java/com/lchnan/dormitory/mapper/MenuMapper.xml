@@ -3,52 +3,39 @@
 <mapper namespace="com.lchnan.dormitory.mapper.MenuMapper">
 
 
-    <resultMap id="Menu" type="com.lchnan.dormitory.entity.Menu">
-        <id column="id" property="id"/>
-        <result column="title" property="title"/>
-        <result column="icon" property="icon"/>
-        <result column="href" property="href"/>
-        <result column="target" property="target"/>
-        <result column="parent_id" property="parentId"/>
-        <result column="type" property="type"/>
-    </resultMap>
+	<resultMap id="Menu" type="com.lchnan.dormitory.entity.Menu">
+		<id column="id" property="id"/>
+		<result column="title"  property="title"/>
+		<result column="icon"  property="icon"/>
+		<result column="href"  property="href"/>
+		<result column="target"  property="target"/>
+		<result column="parent_id"  property="parentId"/>
+		<result column="type"  property="type"/>
+	</resultMap>
 
-    <insert id="deleteUserMenu">
-        delete
-        from tb_user_menu
-        where user_id = #{userId}
-    </insert>
+	<insert id="deleteUserMenu">
+		delete from tb_user_menu where user_id = #{userId}
+	</insert>
 
-    <insert id="createUserMenu">
-        insert into tb_user_menu(user_id, menu_id)
-        values (#{userId}, #{menuId})
-    </insert>
+	<insert id="createUserMenu">
+		insert into tb_user_menu(user_id,menu_id) values(#{userId},#{menuId})
+	</insert>
 
-    <select id="query" resultMap="Menu">
-        select tb_menu.*
-        from tb_menu,
-             tb_user_menu
-        where tb_menu.id = tb_user_menu.menu_id
-          and user_id = #{userId}
-          and tb_menu.type = 0
-    </select>
+	<select id="query" resultMap="Menu">
+		select tb_menu.* from tb_menu,tb_user_menu where tb_menu.id=tb_user_menu.menu_id
+		and user_id = #{userId} and tb_menu.type = 0
+	</select>
 
-    <select id="queryByType" resultMap="Menu">
-        select tb_menu.*
-        from tb_menu
-        where type = 1
-    </select>
+	<select id="queryByType" resultMap="Menu">
+		select tb_menu.* from tb_menu where type = 1
+	</select>
 
-    <select id="queryCheckMenuId" resultType="int">
-        select menu_id
-        from tb_user_menu
-        where user_id = #{userId}
-    </select>
+	<select id="queryCheckMenuId" resultType="int">
+		select menu_id from tb_user_menu where user_id = #{userId}
+	</select>
 
-    <select id="list" resultMap="Menu">
-        select tb_menu.*
-        from tb_menu
-        where type = 0
-    </select>
+	<select id="list" resultMap="Menu">
+		select tb_menu.* from tb_menu where type = 0
+	</select>
 
 </mapper>

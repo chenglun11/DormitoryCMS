@@ -1,6 +1,7 @@
 package com.lchnan.dormitory.mapper;
 
 import com.lchnan.dormitory.entity.Menu;
+import com.lchnan.dormitory.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface MenuMapper {
 
 	public List<Menu> list();
 
-	public int createUserMenu(@Param("userId") Integer userId, @Param("menuId") Integer menuId);
+	public int createUserMenu(@Param("userId") Integer userId,@Param("menuId") Integer menuId);
 
 	public int deleteUserMenu(@Param("userId") Integer userId);
 

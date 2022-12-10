@@ -2,67 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.SelectionDormitoryMapper">
 
-    <resultMap type="com.lchnan.dormitory.entity.SelectionDormitory" id="SelectionDormitory">
-        <id column="id" property="id"/>
-        <result column="dormitory_id" property="dormitoryId"/>
-        <result column="clazz_id" property="clazzId"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.SelectionDormitory" id="SelectionDormitory">
+		<id column="id" property="id"/>
+		<result column="dormitory_id"  property="dormitoryId"/>
+		<result column="clazz_id"  property="clazzId"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true"
-            parameterType="com.lchnan.dormitory.entity.SelectionDormitory">
-        insert into tb_selection_dormitory(dormitory_id,
-                                           clazz_id)
-        values (#{dormitoryId},
-                #{clazzId})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.SelectionDormitory">
+		insert into tb_selection_dormitory(
+			dormitory_id,
+			clazz_id
+		)values(
+			#{dormitoryId},
+			#{clazzId}
+		)
+	</insert>
 
-    <select id="query" resultMap="SelectionDormitory">
-        select * from tb_selection_dormitory
-        <include refid="SelectionDormitoryFindCriteria"/>
-    </select>
+	<select id="query" resultMap="SelectionDormitory">
+		select * from tb_selection_dormitory
+		<include refid="SelectionDormitoryFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_selection_dormitory
-        <include refid="SelectionDormitoryFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_selection_dormitory
+		<include refid="SelectionDormitoryFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="SelectionDormitory">
-        select *
-        from tb_selection_dormitory
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="SelectionDormitory">
+		select * from tb_selection_dormitory where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_selection_dormitory
-        where id = #{id}
-    </delete>
-    <update id="update">
-        update tb_selection_dormitory
-        set dormitory_id=#{dormitoryId},
-            clazz_id=#{clazzId}
-        where id = #{id}
-    </update>
+	<delete id="delete">
+		delete from tb_selection_dormitory where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_selection_dormitory set
+			dormitory_id=#{dormitoryId},
+			clazz_id=#{clazzId}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_selection_dormitory set
-        <if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
-        <if test="clazzId != null">clazz_id = #{clazzId}</if>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_selection_dormitory set
+			<if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
+			<if test="clazzId != null">clazz_id = #{clazzId}</if>
+		where id = #{id}
+	</update>
 
-    <sql id="SelectionDormitoryFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
-            <if test="clazzId != null">and clazz_id = #{clazzId}</if>
-        </where>
-    </sql>
+	<sql id="SelectionDormitoryFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+			<if test="clazzId != null">and clazz_id = #{clazzId}</if>
+		</where>
+	</sql>
 
-    <delete id="deleteByClazzId">
-        delete
-        from tb_selection_dormitory
-        where clazz_id = #{clazzId}
-    </delete>
+	<delete id="deleteByClazzId">
+		delete from tb_selection_dormitory where clazz_id = #{clazzId}
+	</delete>
 
 </mapper>

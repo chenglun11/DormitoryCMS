@@ -1,8 +1,9 @@
 package com.lchnan.dormitory.mapper;
 
-import com.lchnan.dormitory.entity.Grade;
-
 import java.util.List;
+import java.util.Map;
+
+import com.lchnan.dormitory.entity.Grade;
 
 public interface GradeMapper {
 

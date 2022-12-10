@@ -1,8 +1,9 @@
 package com.lchnan.dormitory.mapper;
 
-import com.lchnan.dormitory.entity.Absence;
-
 import java.util.List;
+import java.util.Map;
+
+import com.lchnan.dormitory.entity.Absence;
 
 public interface AbsenceMapper {
 

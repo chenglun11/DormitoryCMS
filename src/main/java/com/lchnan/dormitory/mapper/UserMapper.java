@@ -1,9 +1,10 @@
 package com.lchnan.dormitory.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.lchnan.dormitory.entity.User;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 public interface UserMapper {
 
@@ -19,7 +20,7 @@ public interface UserMapper {
 
 	public User detail(Integer id);
 
-	public User login(@Param("userName") String userName, @Param("password") String password);
+	public User login(@Param("userName") String userName,@Param("password") String password);
 
 	public int count(User user);
 

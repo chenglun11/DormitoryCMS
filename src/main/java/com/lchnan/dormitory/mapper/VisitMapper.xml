@@ -2,96 +2,95 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.VisitMapper">
 
-    <resultMap type="com.lchnan.dormitory.entity.Visit" id="Visit">
-        <id column="id" property="id"/>
-        <result column="visitor" property="visitor"/>
-        <result column="phone" property="phone"/>
-        <result column="sex" property="sex"/>
-        <result column="idcard" property="idcard"/>
-        <result column="student_id" property="studentId"/>
-        <result column="visit_time" property="visitTime"/>
-        <result column="leave_time" property="leaveTime"/>
-        <result column="remark" property="remark"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.Visit" id="Visit">
+		<id column="id" property="id"/>
+		<result column="visitor"  property="visitor"/>
+		<result column="phone"  property="phone"/>
+		<result column="sex"  property="sex"/>
+		<result column="idcard"  property="idcard"/>
+		<result column="student_id"  property="studentId"/>
+		<result column="visit_time"  property="visitTime"/>
+		<result column="leave_time"  property="leaveTime"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Visit">
-        insert into tb_visit(visitor,
-                             phone,
-                             sex,
-                             idcard,
-                             student_id,
-                             visit_time,
-                             leave_time,
-                             remark)
-        values (#{visitor},
-                #{phone},
-                #{sex},
-                #{idcard},
-                #{studentId},
-                #{visitTime},
-                #{leaveTime},
-                #{remark})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Visit">
+		insert into tb_visit(
+			visitor,
+			phone,
+			sex,
+			idcard,
+			student_id,
+			visit_time,
+			leave_time,
+			remark
+		)values(
+			#{visitor},
+			#{phone},
+			#{sex},
+			#{idcard},
+			#{studentId},
+			#{visitTime},
+			#{leaveTime},
+			#{remark}
+		)
+	</insert>
 
-    <select id="query" resultMap="Visit">
-        select * from tb_visit
-        <include refid="VisitFindCriteria"/>
-    </select>
+	<select id="query" resultMap="Visit">
+		select * from tb_visit
+		<include refid="VisitFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_visit
-        <include refid="VisitFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_visit
+		<include refid="VisitFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="Visit">
-        select *
-        from tb_visit
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="Visit">
+		select * from tb_visit where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_visit
-        where id = #{id}
-    </delete>
-    <update id="update">
-        update tb_visit
-        set visitor=#{visitor},
-            phone=#{phone},
-            sex=#{sex},
-            idcard=#{idcard},
-            student_id=#{studentId},
-            visit_time=#{visitTime},
-            leave_time=#{leaveTime},
-            remark=#{remark}
-        where id = #{id}
-    </update>
+	<delete id="delete">
+		delete from tb_visit where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_visit set
+			visitor=#{visitor},
+			phone=#{phone},
+			sex=#{sex},
+			idcard=#{idcard},
+			student_id=#{studentId},
+			visit_time=#{visitTime},
+			leave_time=#{leaveTime},
+			remark=#{remark}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_visit
-        <set>
-            <if test="visitor != null and visitor != ''">visitor = #{visitor},</if>
-            <if test="phone != null and phone != ''">phone = #{phone},</if>
-            <if test="sex != null">sex = #{sex},</if>
-            <if test="idcard != null and idcard != ''">idcard = #{idcard},</if>
-            <if test="studentId != null">student_id = #{studentId},</if>
-            <if test="visitTime != null">visit_time = #{visitTime},</if>
-            <if test="leaveTime != null">leave_time = #{leaveTime},</if>
-            <if test="remark != null and remark != ''">remark = #{remark},</if>
-        </set>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_visit
+		<set>
+			<if test="visitor != null and visitor != ''"> visitor = #{visitor},</if>
+			<if test="phone != null and phone != ''"> phone = #{phone},</if>
+			<if test="sex != null">sex = #{sex},</if>
+			<if test="idcard != null and idcard != ''"> idcard = #{idcard},</if>
+			<if test="studentId != null">student_id = #{studentId},</if>
+			<if test="visitTime != null"> visit_time = #{visitTime},</if>
+			<if test="leaveTime != null"> leave_time = #{leaveTime},</if>
+			<if test="remark != null and remark != ''"> remark = #{remark},</if>
+		</set>
+		where id = #{id}
+	</update>
 
-    <sql id="VisitFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="visitor != null and visitor != ''">and visitor = #{visitor}</if>
-            <if test="phone != null and phone != ''">and phone = #{phone}</if>
-            <if test="sex != null">and sex = #{sex}</if>
-            <if test="idcard != null and idcard != ''">and idcard = #{idcard}</if>
-            <if test="studentId != null">and student_id = #{studentId}</if>
-            <if test="remark != null and remark != ''">and remark = #{remark}</if>
-        </where>
-    </sql>
+	<sql id="VisitFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="visitor != null and visitor != ''">and visitor = #{visitor}</if>
+			<if test="phone != null and phone != ''">and phone = #{phone}</if>
+			<if test="sex != null">and sex = #{sex}</if>
+			<if test="idcard != null and idcard != ''">and idcard = #{idcard}</if>
+			<if test="studentId != null">and student_id = #{studentId}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
 
 </mapper>

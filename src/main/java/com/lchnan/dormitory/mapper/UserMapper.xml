@@ -2,94 +2,89 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.UserMapper">
 
-<!--    定义返回值-->
-    <resultMap type="com.lchnan.dormitory.entity.User" id="User">
-        <id column="id" property="id"/>
-        <result column="user_name" property="userName"/>
-        <result column="password" property="password"/>
-        <result column="name" property="name"/>
-        <result column="phone" property="phone"/>
-        <result column="type" property="type"/>
-        <result column="remark" property="remark"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.User" id="User">
+		<id column="id" property="id"/>
+		<result column="user_name"  property="userName"/>
+		<result column="password"  property="password"/>
+		<result column="name"  property="name"/>
+		<result column="phone"  property="phone"/>
+		<result column="type"  property="type"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.User">
-        insert into tb_user(user_name,
-                            password,
-                            name,
-                            phone,
-                            type,
-                            remark)
-        values (#{userName},
-                #{password},
-                #{name},
-                #{phone},
-                #{type},
-                #{remark})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.User">
+		insert into tb_user(
+			user_name,
+			password,
+			name,
+			phone,
+			type,
+			remark
+		)values(
+			#{userName},
+			#{password},
+			#{name},
+			#{phone},
+			#{type},
+			#{remark}
+		)
+	</insert>
 
-    <select id="query" resultMap="User">
-        select * from tb_user
-        <include refid="UserFindCriteria"/>
-    </select>
+	<select id="query" resultMap="User">
+		select * from tb_user
+		<include refid="UserFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_user
-        <include refid="UserFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_user
+		<include refid="UserFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="User">
-        select *
-        from tb_user
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="User">
+		select * from tb_user where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_user
-        where id = #{id}
-    </delete>
-    <update id="update">
-        update tb_user
-        set user_name=#{userName},
-            password=#{password},
-            name=#{name},
-            phone=#{phone},
-            type=#{type},
-            remark=#{remark}
-        where id = #{id}
-    </update>
+	<delete id="delete">
+		delete from tb_user where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_user set
+			user_name=#{userName},
+			password=#{password},
+			name=#{name},
+			phone=#{phone},
+			type=#{type},
+			remark=#{remark}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_user
-        <set>
-            <if test="userName != null and userName != ''">user_name = #{userName},</if>
-            <if test="password != null and password != ''">password = #{password},</if>
-            <if test="name != null and name != ''">name = #{name},</if>
-            <if test="phone != null and phone != ''">phone = #{phone},</if>
-            <if test="type != null">type = #{type},</if>
-            <if test="remark != null and remark != ''">remark = #{remark},</if>
-        </set>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_user
+		<set>
+			<if test="userName != null and userName != ''"> user_name = #{userName},</if>
+			<if test="password != null and password != ''"> password = #{password},</if>
+			<if test="name != null and name != ''"> name = #{name},</if>
+			<if test="phone != null and phone != ''"> phone = #{phone},</if>
+			<if test="type != null">type = #{type},</if>
+			<if test="remark != null and remark != ''"> remark = #{remark},</if>
+		</set>
+		where id = #{id}
+	</update>
 
-    <sql id="UserFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="userName != null and userName != ''">and user_name like concat('%',#{userName},'%')</if>
-            <if test="password != null and password != ''">and password = #{password}</if>
-            <if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
-            <if test="phone != null and phone != ''">and phone = #{phone}</if>
-            <if test="type != null">and type = #{type}</if>
-            <if test="remark != null and remark != ''">and remark = #{remark}</if>
-        </where>
-    </sql>
+	<sql id="UserFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="userName != null and userName != ''">and user_name like concat('%',#{userName},'%') </if>
+			<if test="password != null and password != ''">and password = #{password}</if>
+			<if test="name != null and name != ''">and name like concat('%',#{name},'%')</if>
+			<if test="phone != null and phone != ''">and phone = #{phone}</if>
+			<if test="type != null">and type = #{type}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
 
-    <select id="login" resultMap="User">
-        select *
-        from tb_user
-        where user_name = #{userName}
-          and password = #{password}
-    </select>
+	<select id="login" resultMap="User">
+		select * from tb_user where user_name = #{userName} and password=#{password}
+	</select>
 
 </mapper>

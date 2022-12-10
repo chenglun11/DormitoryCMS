@@ -2,68 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.SelectionJoinerMapper">
 
-    <resultMap type="com.lchnan.dormitory.entity.SelectionJoiner" id="SelectionJoiner">
-        <id column="id" property="id"/>
-        <result column="selection_id" property="selectionId"/>
-        <result column="clazz_id" property="clazzId"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.SelectionJoiner" id="SelectionJoiner">
+		<id column="id" property="id"/>
+		<result column="selection_id"  property="selectionId"/>
+		<result column="clazz_id"  property="clazzId"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true"
-            parameterType="com.lchnan.dormitory.entity.SelectionJoiner">
-        insert into tb_selection_joiner(selection_id,
-                                        clazz_id)
-        values (#{selectionId},
-                #{clazzId})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.SelectionJoiner">
+		insert into tb_selection_joiner(
+			selection_id,
+			clazz_id
+		)values(
+			#{selectionId},
+			#{clazzId}
+		)
+	</insert>
 
-    <select id="query" resultMap="SelectionJoiner">
-        select * from tb_selection_joiner
-        <include refid="SelectionJoinerFindCriteria"/>
-    </select>
+	<select id="query" resultMap="SelectionJoiner">
+		select * from tb_selection_joiner
+		<include refid="SelectionJoinerFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_selection_joiner
-        <include refid="SelectionJoinerFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_selection_joiner
+		<include refid="SelectionJoinerFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="SelectionJoiner">
-        select *
-        from tb_selection_joiner
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="SelectionJoiner">
+		select * from tb_selection_joiner where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_selection_joiner
-        where id = #{id}
-    </delete>
-    <update id="update">
-        update tb_selection_joiner
-        set selection_id=#{selectionId},
-            clazz_id=#{clazzId}
-        where id = #{id}
-    </update>
+	<delete id="delete">
+		delete from tb_selection_joiner where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_selection_joiner set
+			selection_id=#{selectionId},
+			clazz_id=#{clazzId}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_selection_joiner set
-        <if test="selectionId != null">selection_id = #{selectionId}</if>,
-        <if test="clazzId != null">clazz_id = #{clazzId}</if>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_selection_joiner set
+			<if test="selectionId != null">selection_id = #{selectionId}</if>,
+			<if test="clazzId != null">clazz_id = #{clazzId}</if>
+		where id = #{id}
+	</update>
 
-    <sql id="SelectionJoinerFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="selectionId != null">and selection_id = #{selectionId}</if>
-            <if test="clazzId != null">and clazz_id = #{clazzId}</if>
-        </where>
-    </sql>
+	<sql id="SelectionJoinerFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="selectionId != null">and selection_id = #{selectionId}</if>
+			<if test="clazzId != null">and clazz_id = #{clazzId}</if>
+		</where>
+	</sql>
 
-    <delete id="deleteBySelectionId">
-        delete
-        from tb_selection_joiner
-        where selection_id = #{selectionId}
-    </delete>
+	<delete id="deleteBySelectionId">
+		delete from tb_selection_joiner where selection_id = #{selectionId}
+	</delete>
 
 
 </mapper>

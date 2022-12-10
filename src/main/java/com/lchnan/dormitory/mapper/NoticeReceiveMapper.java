@@ -1,8 +1,9 @@
 package com.lchnan.dormitory.mapper;
 
-import com.lchnan.dormitory.entity.NoticeReceive;
-
 import java.util.List;
+import java.util.Map;
+
+import com.lchnan.dormitory.entity.NoticeReceive;
 
 public interface NoticeReceiveMapper {
 

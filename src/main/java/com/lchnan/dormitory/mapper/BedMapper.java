@@ -1,8 +1,9 @@
 package com.lchnan.dormitory.mapper;
 
-import com.lchnan.dormitory.entity.Bed;
-
 import java.util.List;
+import java.util.Map;
+
+import com.lchnan.dormitory.entity.Bed;
 
 public interface BedMapper {
 

@@ -1,9 +1,10 @@
 package com.lchnan.dormitory.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.lchnan.dormitory.entity.Dormitory;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 public interface DormitoryMapper {
 
@@ -21,6 +22,6 @@ public interface DormitoryMapper {
 
 	public int count(Dormitory dormitory);
 
-	public int deleteByBuildingIdAndStoryId(@Param("buildingId") Integer buildingId, @Param("storeyId") Integer storeyId);
+	public int deleteByBuildingIdAndStoryId(@Param("buildingId") Integer buildingId, @Param("storeyId")Integer storeyId);
 
 }

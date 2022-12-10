@@ -2,78 +2,77 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.AbsenceMapper">
 
-    <resultMap type="com.lchnan.dormitory.entity.Absence" id="Absence">
-        <id column="id" property="id"/>
-        <result column="student_id" property="studentId"/>
-        <result column="dormitory_id" property="dormitoryId"/>
-        <result column="start_time" property="startTime"/>
-        <result column="end_time" property="endTime"/>
-        <result column="remark" property="remark"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.Absence" id="Absence">
+		<id column="id" property="id"/>
+		<result column="student_id"  property="studentId"/>
+		<result column="dormitory_id"  property="dormitoryId"/>
+		<result column="start_time"  property="startTime"/>
+		<result column="end_time"  property="endTime"/>
+		<result column="remark"  property="remark"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Absence">
-        insert into tb_absence(student_id,
-                               dormitory_id,
-                               start_time,
-                               end_time,
-                               remark)
-        values (#{studentId},
-                #{dormitoryId},
-                #{startTime},
-                #{endTime},
-                #{remark})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.Absence">
+		insert into tb_absence(
+			student_id,
+			dormitory_id,
+			start_time,
+			end_time,
+			remark
+		)values(
+			#{studentId},
+			#{dormitoryId},
+			#{startTime},
+			#{endTime},
+			#{remark}
+		)
+	</insert>
 
-    <select id="query" resultMap="Absence">
-        select * from tb_absence
-        <include refid="AbsenceFindCriteria"/>
-    </select>
+	<select id="query" resultMap="Absence">
+		select * from tb_absence
+		<include refid="AbsenceFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_absence
-        <include refid="AbsenceFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_absence
+		<include refid="AbsenceFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="Absence">
-        select *
-        from tb_absence
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="Absence">
+		select * from tb_absence where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_absence
-        where id = #{id}
-    </delete>
-    <update id="update">
-        update tb_absence
-        set student_id=#{studentId},
-            dormitory_id=#{dormitoryId},
-            start_time=#{startTime},
-            end_time=#{endTime},
-            remark=#{remark}
-        where id = #{id}
-    </update>
+	<delete id="delete">
+		delete from tb_absence where id = #{id}
+	</delete>
+	<update id="update">
+		update tb_absence set
+			student_id=#{studentId},
+			dormitory_id=#{dormitoryId},
+			start_time=#{startTime},
+			end_time=#{endTime},
+			remark=#{remark}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_absence
-        <set>
-            <if test="studentId != null">student_id = #{studentId},</if>
-            <if test="dormitoryId != null">dormitory_id = #{dormitoryId},</if>
-            <if test="startTime != null">start_time = #{startTime},</if>
-            <if test="endTime != null">end_time = #{endTime},</if>
-            <if test="remark != null and remark != ''">remark = #{remark},</if>
-        </set>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_absence
+		<set>
+			<if test="studentId != null">student_id = #{studentId},</if>
+			<if test="dormitoryId != null">dormitory_id = #{dormitoryId},</if>
+			<if test="startTime != null"> start_time = #{startTime},</if>
+			<if test="endTime != null"> end_time = #{endTime},</if>
+			<if test="remark != null and remark != ''"> remark = #{remark},</if>
+		</set>
+		where id = #{id}
+	</update>
 
-    <sql id="AbsenceFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="studentId != null">and student_id = #{studentId}</if>
-            <if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
-            <if test="remark != null and remark != ''">and remark = #{remark}</if>
-        </where>
-    </sql>
+	<sql id="AbsenceFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="studentId != null">and student_id = #{studentId}</if>
+			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+			<if test="remark != null and remark != ''">and remark = #{remark}</if>
+		</where>
+	</sql>
 
 </mapper>

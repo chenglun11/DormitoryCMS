@@ -1,10 +1,10 @@
 package com.lchnan.dormitory.mapper;
 
-import com.lchnan.dormitory.entity.DormitoryStudent;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
+
+import com.lchnan.dormitory.entity.DormitoryStudent;
+import org.apache.ibatis.annotations.Param;
 
 public interface DormitoryStudentMapper {
 
@@ -12,7 +12,7 @@ public interface DormitoryStudentMapper {
 
 	public int delete(Integer id);
 
-	public int deleteByCond(@Param("studentId") Integer studentId, @Param("dormitoryId") Integer dormitoryId);
+	public int deleteByCond(@Param("studentId") Integer studentId, @Param("dormitoryId")Integer dormitoryId);
 
 	public int update(DormitoryStudent dormitoryStudent);
 
@@ -26,6 +26,6 @@ public interface DormitoryStudentMapper {
 
 	public int countByBuildingId(Integer buildingId);
 
-	public Map<String, Object> queryStudentByBedId(Integer bedId);
+	public Map<String,Object> queryStudentByBedId(Integer bedId);
 
 }

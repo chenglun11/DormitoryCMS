@@ -2,104 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lchnan.dormitory.mapper.DormitoryStudentMapper">
 
-    <resultMap type="com.lchnan.dormitory.entity.DormitoryStudent" id="DormitoryStudent">
-        <id column="id" property="id"/>
-        <result column="dormitory_id" property="dormitoryId"/>
-        <result column="bed_id" property="bedId"/>
-        <result column="student_id" property="studentId"/>
-        <result column="checkin" property="checkin"/>
-        <result column="status" property="status"/>
-    </resultMap>
+	<resultMap type="com.lchnan.dormitory.entity.DormitoryStudent" id="DormitoryStudent">
+		<id column="id" property="id"/>
+		<result column="dormitory_id"  property="dormitoryId"/>
+		<result column="bed_id"  property="bedId"/>
+		<result column="student_id"  property="studentId"/>
+		<result column="checkin"  property="checkin"/>
+		<result column="status"  property="status"/>
+	</resultMap>
 
-    <insert id="create" keyProperty="id" useGeneratedKeys="true"
-            parameterType="com.lchnan.dormitory.entity.DormitoryStudent">
-        insert into tb_dormitory_student(dormitory_id,
-                                         bed_id,
-                                         student_id,
-                                         checkin,
-                                         status)
-        values (#{dormitoryId},
-                #{bedId},
-                #{studentId},
-                #{checkin},
-                #{status})
-    </insert>
+	<insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.lchnan.dormitory.entity.DormitoryStudent">
+		insert into tb_dormitory_student(
+			dormitory_id,
+			bed_id,
+			student_id,
+			checkin,
+			status
+		)values(
+			#{dormitoryId},
+			#{bedId},
+			#{studentId},
+			#{checkin},
+			#{status}
+		)
+	</insert>
 
-    <select id="query" resultMap="DormitoryStudent">
-        select * from tb_dormitory_student
-        <include refid="DormitoryStudentFindCriteria"/>
-    </select>
+	<select id="query" resultMap="DormitoryStudent">
+		select * from tb_dormitory_student
+		<include refid="DormitoryStudentFindCriteria"/>
+	</select>
 
-    <select id="count" resultType="int">
-        select count(1) from tb_dormitory_student
-        <include refid="DormitoryStudentFindCriteria"/>
-    </select>
+	<select id="count" resultType="int">
+		select count(1) from tb_dormitory_student
+		<include refid="DormitoryStudentFindCriteria"/>
+	</select>
 
-    <select id="detail" resultMap="DormitoryStudent">
-        select *
-        from tb_dormitory_student
-        where id = #{id}
-    </select>
+	<select id="detail" resultMap="DormitoryStudent">
+		select * from tb_dormitory_student where id = #{id}
+	</select>
 
-    <delete id="delete">
-        delete
-        from tb_dormitory_student
-        where id = #{id}
-    </delete>
+	<delete id="delete">
+		delete from tb_dormitory_student where id = #{id}
+	</delete>
 
-    <delete id="deleteByCond">
-        delete
-        from tb_dormitory_student
-        where student_id = #{studentId}
-    </delete>
+	<delete id="deleteByCond">
+		delete from tb_dormitory_student where student_id = #{studentId}
+	</delete>
 
 
-    <update id="update">
-        update tb_dormitory_student
-        set dormitory_id=#{dormitoryId},
-            bed_id=#{bedId},
-            student_id=#{studentId},
-            checkin=#{checkin},
-            status=#{status}
-        where id = #{id}
-    </update>
+	<update id="update">
+		update tb_dormitory_student set
+			dormitory_id=#{dormitoryId},
+			bed_id=#{bedId},
+			student_id=#{studentId},
+			checkin=#{checkin},
+			status=#{status}
+		where id = #{id}
+	</update>
 
-    <update id="updateSelective">
-        update tb_dormitory_student set
-        <if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
-        <if test="bedId != null">bed_id = #{bedId}</if>,
-        <if test="studentId != null">student_id = #{studentId}</if>,
-        <if test="checkin != null and checkin != ''">checkin = #{checkin}</if>,
-        <if test="status != null">status = #{status}</if>
-        where id = #{id}
-    </update>
+	<update id="updateSelective">
+		update tb_dormitory_student set
+			<if test="dormitoryId != null">dormitory_id = #{dormitoryId}</if>,
+			<if test="bedId != null">bed_id = #{bedId}</if>,
+			<if test="studentId != null">student_id = #{studentId}</if>,
+			<if test="checkin != null and checkin != ''"> checkin = #{checkin}</if>,
+			<if test="status != null">status = #{status}</if>
+		where id = #{id}
+	</update>
 
-    <sql id="DormitoryStudentFindCriteria">
-        <where>
-            <if test="id != null">and id = #{id}</if>
-            <if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
-            <if test="bedId != null">and bed_id = #{bedId}</if>
-            <if test="studentId != null">and student_id = #{studentId}</if>
-            <if test="status != null">and status = #{status}</if>
-        </where>
-    </sql>
-    <!--查询楼宇入住数量-->
-    <select id="countByBuildingId" resultType="int">
-        select count(distinct student_id) cnt
-        from tb_dormitory_student,
-             tb_dormitory
-        where tb_dormitory_student.dormitory_id = tb_dormitory.id
-          and building_id = #{buildingId}
-    </select>
+	<sql id="DormitoryStudentFindCriteria">
+		<where>
+			<if test="id != null">and id = #{id}</if>
+			<if test="dormitoryId != null">and dormitory_id = #{dormitoryId}</if>
+			<if test="bedId != null">and bed_id = #{bedId}</if>
+			<if test="studentId != null">and student_id = #{studentId}</if>
+			<if test="status != null">and status = #{status}</if>
+		</where>
+	</sql>
+	<!--查询楼宇入住数量-->
+	<select id="countByBuildingId" resultType="int">
+		select count(distinct student_id) cnt from tb_dormitory_student,tb_dormitory where tb_dormitory_student.dormitory_id = tb_dormitory.id
+		and building_id = #{buildingId}
+	</select>
 
-    <!--查询床位对应的学生-->
-    <select id="queryStudentByBedId" resultType="java.util.HashMap">
-        select student_id, tb_student.name
-        from tb_dormitory_student,
-             tb_student
-        where tb_dormitory_student.student_id = tb_student.id
-          and bed_id = #{bedId} limit 1
-    </select>
+	<!--查询床位对应的学生-->
+	<select id="queryStudentByBedId" resultType="java.util.HashMap">
+		select student_id,tb_student.name from tb_dormitory_student ,tb_student where
+		tb_dormitory_student.student_id = tb_student.id and bed_id = #{bedId} limit 1
+	</select>
 
 
 </mapper>
