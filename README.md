@@ -4,7 +4,7 @@
 
 #### 请使用IDEA、WebStorm分别打开，本项目前后端分离
 
-前端地址为：[](https://github.com/chenglun11/Dormitoryfront)
+[前端地址](https://github.com/chenglun11/Dormitoryfront)
 
 #### Please use IDEA and WebStorm to open separately, the front and back ends of this project are separated
 
