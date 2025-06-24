@@ -1,4 +1,3 @@
-# 感谢您能看到这里，这是我的毕业设计-在线宿舍管理系统.
 
 <br />
 
@@ -10,8 +9,6 @@
     <a href="https://github.com/chenglun11/DormitoryCMS/blob/main/README.md"><strong>Explore this document »</strong></a>
     <br />
     <br />
-    <a href="#demo">Demo</a>
-    ·
     <a href="https://github.com/chenglun11/DormitoryCMS/blob/main/README.md">简体中文[ZH-CN]</a>
     ·
     <a href="https://github.com/chenglun11/DormitoryCMS/issues">Report Bug</a>
@@ -32,7 +29,8 @@ TOC
 
 ### Requirements
 所有依赖基于Maven管理
-请务必通过 [前端地址](https://github.com/chenglun11/Dormitoryfront) 打开
+本项目前后端分离,且区分repo.
+请务必通过 [前端仓库地址](https://github.com/chenglun11/Dormitoryfront) 打开
 
 
 ### Getting Started
